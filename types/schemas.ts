@@ -10,7 +10,7 @@ export const createGigBookingSchema = z.object({
   clientName: z.string().min(1, "Namn är obligatoriskt"),
   clientEmail: z.string().email("Ogiltig email"),
   clientPhone: z.string().min(1, "Telefon är obligatorisk"),
-  venue: z.string().min(1, "Telefon är obligatorisk"),
+  venue: z.string().min(1, "Spelplats är obligatorisk"),
 });
 
 export type CreateGigBookingForm = z.infer<typeof createGigBookingSchema>;
