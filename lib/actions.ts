@@ -1,5 +1,5 @@
 "use server";
-import { CreateGigBookingRequest, GigBooking } from "@/types";
+import { GigBookingRequest, GigBooking } from "@/types";
 export async function fetchAllGigBookings(): Promise<GigBooking[]> {
   try {
     const data = await fetch(
@@ -21,7 +21,7 @@ export async function fetchAllGigBookings(): Promise<GigBooking[]> {
 }
 
 export async function createGigBooking(
-  gig: CreateGigBookingRequest,
+  gig: GigBookingRequest,
 ): Promise<GigBooking> {
   try {
     const request = await fetch("http://localhost:5002/api/gigbooking/create", {
@@ -42,5 +42,33 @@ export async function createGigBooking(
   } catch (error) {
     console.log("Error: " + error);
     throw new Error("Error: " + error);
+  }
+}
+
+export async function updateGigBooking(
+  id: string,
+  gig: GigBookingRequest,
+): Promise<GigBooking> {
+  try {
+    const request = await fetch(`http://localhost:5002/api/gigbooking/update/${id}`, {
+      method: "PUT", 
+      body: JSON.stringify(gig),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!request.ok) {
+      const errorJson = await request.json().catch(() => null);
+      console.log(request.statusText);
+      console.error("Backend error details:", errorJson);
+      throw new Error(`Failed to update booking: ${request.status}`);
+    }
+
+    const updatedBooking: GigBooking = await request.json();
+    return updatedBooking;
+  } catch (error) {
+    console.log("Error updating gig: " + error);
+    throw new Error("Error updating gig: " + error);
   }
 }

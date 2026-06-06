@@ -28,11 +28,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Dispatch, SetStateAction, useEffect } from "react";
-import { CreateGigBookingRequest, GigBooking } from "@/types";
+import { GigBookingRequest, GigBooking } from "@/types";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createGigBookingSchema, CreateGigBookingForm } from "@/types/schemas";
+import { GigBookingSchema, GigBookingForm } from "@/types/schemas";
 import { createGigBooking } from "@/lib/actions";
+import { useGigBookings } from "@/hooks/useGigBookings";
 
 type GigBookingModalProps = {
   isOpen: boolean;
@@ -45,7 +46,7 @@ type GigBookingModalProps = {
   >;
   updateGigBooking: {
     isUpdating: boolean;
-    gigBooking: GigBooking| null;
+    gigBooking: GigBooking | null;
   };
 };
 
@@ -58,14 +59,16 @@ export default function GigBookingModal({
   setBookedTime,
   updateGigBooking,
 }: GigBookingModalProps) {
+  const { modifyBooking } = useGigBookings();
+
   const {
     register,
     handleSubmit,
     control,
     reset,
     formState: { errors },
-  } = useForm<CreateGigBookingForm>({
-    resolver: zodResolver(createGigBookingSchema),
+  } = useForm<GigBookingForm>({
+    resolver: zodResolver(GigBookingSchema),
     defaultValues: {
       startTime: "",
       endTime: "",
@@ -114,36 +117,54 @@ export default function GigBookingModal({
     }
   }, [updateGigBooking, isOpen, reset, isEditMode]);
 
-  const onSubmit = async (data: CreateGigBookingForm) => {
-    const startDate = createISOString(selectedDate, data.startTime);
-    const endDate = createISOString(selectedDate, data.endTime);
+  const onSubmit = async (data: GigBookingForm) => {
+    try {
+      const payload = {
+        ...data,
+        startDate: createISOString(selectedDate, data.startTime),
+        endDate: createISOString(selectedDate, data.endTime),
+      };
 
-    const request: CreateGigBookingRequest = {
-      startDate,
-      endDate,
-      street: data.street,
-      streetNumber: data.streetNumber,
-      zipCode: data.zipCode,
-      city: data.city,
-      clientName: data.clientName,
-      clientEmail: data.clientEmail,
-      clientPhone: data.clientPhone,
-      venue: data.venue,
-    };
+      const request: GigBookingRequest = {
+        startDate: payload.startDate,
+        endDate: payload.endDate,
+        street: data.street,
+        streetNumber: data.streetNumber,
+        zipCode: data.zipCode,
+        city: data.city,
+        clientName: data.clientName,
+        clientEmail: data.clientEmail,
+        clientPhone: data.clientPhone,
+        venue: data.venue,
+      };
 
-    const booking: GigBooking = await createGigBooking(request);
-    const savedGigBookings = JSON.parse(
-      localStorage.getItem("myBookings") ?? "[]",
-    );
-    localStorage.setItem(
-      "myBookings",
-      JSON.stringify([...savedGigBookings, booking]),
-    );
+      if (updateGigBooking.isUpdating && updateGigBooking.gigBooking) {
+        await modifyBooking(updateGigBooking.gigBooking.id, payload);
 
-    reset({ startTime: "", endTime: "" });
-    setIsOpen(false);
-    setBookingDone(!bookingDone);
-    setBookedTime({ start: data.startTime, end: data.endTime });
+        toast.success("Bokningen har uppdaterats!", {
+          description: "En ny bekräftelse har sparats.",
+        });
+        setIsOpen(false);
+        setBookingDone(!bookingDone);
+        setBookedTime({ start: data.startTime, end: data.endTime });
+      } else {
+        const booking: GigBooking = await createGigBooking(request);
+        const savedGigBookings = JSON.parse(
+          localStorage.getItem("myBookings") ?? "[]",
+        );
+        localStorage.setItem(
+          "myBookings",
+          JSON.stringify([...savedGigBookings, booking]),
+        );
+
+        reset({ startTime: "", endTime: "" });
+        setIsOpen(false);
+        setBookingDone(!bookingDone);
+        setBookedTime({ start: data.startTime, end: data.endTime });
+      }
+    } catch (error) {
+      toast.error("Något gick fel vid sparandet.");
+    }
   };
 
   return (
@@ -180,7 +201,9 @@ export default function GigBookingModal({
                     </Select>
                   )}
                 />
-                {errors.startTime && <FieldError>{errors.startTime.message}</FieldError>}
+                {errors.startTime && (
+                  <FieldError>{errors.startTime.message}</FieldError>
+                )}
               </Field>
               <Field>
                 <FieldLabel>Sluttid</FieldLabel>
@@ -204,7 +227,9 @@ export default function GigBookingModal({
                     </Select>
                   )}
                 />
-                {errors.endTime && <FieldError>{errors.endTime.message}</FieldError>}
+                {errors.endTime && (
+                  <FieldError>{errors.endTime.message}</FieldError>
+                )}
               </Field>
             </div>
             <div className="grid grid-cols-2 gap-4">
@@ -215,7 +240,9 @@ export default function GigBookingModal({
                   placeholder="Storgatan"
                   {...register("street")}
                 />
-                {errors.streetNumber && <FieldError>{errors.streetNumber.message}</FieldError>}
+                {errors.streetNumber && (
+                  <FieldError>{errors.streetNumber.message}</FieldError>
+                )}
               </Field>
               <Field>
                 <FieldLabel htmlFor="streetNumber">Gatunummer</FieldLabel>
@@ -224,7 +251,9 @@ export default function GigBookingModal({
                   placeholder="14"
                   {...register("streetNumber")}
                 />
-                {errors.streetNumber && <FieldError>{errors.streetNumber.message}</FieldError>}
+                {errors.streetNumber && (
+                  <FieldError>{errors.streetNumber.message}</FieldError>
+                )}
               </Field>
             </div>
             <div className="grid grid-cols-2 gap-4">
@@ -235,7 +264,9 @@ export default function GigBookingModal({
                   placeholder="11122"
                   {...register("zipCode")}
                 />
-                {errors.zipCode && <FieldError>{errors.zipCode.message}</FieldError>}
+                {errors.zipCode && (
+                  <FieldError>{errors.zipCode.message}</FieldError>
+                )}
               </Field>
 
               <Field>
@@ -264,7 +295,9 @@ export default function GigBookingModal({
                 placeholder="Anna Lindgren"
                 {...register("clientName")}
               />
-              {errors.clientName && <FieldError>{errors.clientName.message}</FieldError>}
+              {errors.clientName && (
+                <FieldError>{errors.clientName.message}</FieldError>
+              )}
             </Field>
             <Field>
               <FieldLabel htmlFor="clientEmail">Email</FieldLabel>
@@ -274,7 +307,9 @@ export default function GigBookingModal({
                 placeholder="anna@email.com"
                 {...register("clientEmail")}
               />
-              {errors.clientEmail && <FieldError>{errors.clientEmail.message}</FieldError>}
+              {errors.clientEmail && (
+                <FieldError>{errors.clientEmail.message}</FieldError>
+              )}
             </Field>
             <Field>
               <FieldLabel htmlFor="clientPhone">Telefon</FieldLabel>
@@ -283,7 +318,9 @@ export default function GigBookingModal({
                 placeholder="0701234567"
                 {...register("clientPhone")}
               />
-              {errors.clientPhone && <FieldError>{errors.clientPhone.message}</FieldError>}
+              {errors.clientPhone && (
+                <FieldError>{errors.clientPhone.message}</FieldError>
+              )}
             </Field>
           </FieldGroup>
           <DialogFooter className="mt-4 flex justify-between">

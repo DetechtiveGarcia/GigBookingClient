@@ -12,7 +12,7 @@ export type GigBooking = {
   venue: string;
 };
 
-export type CreateGigBookingRequest = {
+export type GigBookingRequest = {
   startDate: string;
   endDate: string;
   street: string;
@@ -28,3 +28,4 @@ export type CreateGigBookingRequest = {
 export type LocalStorageSavedGigBookings = {
   gigBookings: GigBooking[];
 }
+
