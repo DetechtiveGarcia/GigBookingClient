@@ -72,3 +72,21 @@ export async function updateGigBooking(
     throw new Error("Error updating gig: " + error);
   }
 }
+
+export async function deleteGigBooking(id: string): Promise<boolean> {
+  try {
+    const request = await fetch(`http://localhost:5002/api/gigbooking/delete/${id}`, {
+      method: "DELETE",
+    });
+
+    if (!request.ok) {
+      console.log(request.statusText);
+      throw new Error(`Failed to delete booking: ${request.status}`);
+    }
+
+    return true;
+  } catch (error) {
+    console.log("Error deleting gig: " + error);
+    throw new Error("Error deleting gig: " + error);
+  }
+}
