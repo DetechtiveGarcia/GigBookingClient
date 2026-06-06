@@ -13,4 +13,9 @@ export const createGigBookingSchema = z.object({
   venue: z.string().min(1, "Spelplats är obligatorisk"),
 });
 
+export const findBookingSchema = z.object({
+  bookingId: z.string().uuid("Ogiltigt bokningsnummer. Kontrollera ditt format."),
+});
+
+export type FindBookingForm = z.infer<typeof findBookingSchema>;
 export type CreateGigBookingForm = z.infer<typeof createGigBookingSchema>;
