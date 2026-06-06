@@ -1,4 +1,5 @@
 "use client";
+import FindBookingModal from "./FindBookingModal";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -11,7 +12,7 @@ import { GigBooking } from "@/types";
 // import "@fullcalendar/common/main.css";
 // import "@fullcalendar/daygrid/main.css";
 export default function Calendar() {
-  const { gigBookings, refresh, getBookingById } = useGigBookings();
+  const { gigBookings, refresh, getBookingByIdLocalStorage } = useGigBookings();
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [bookedTime, setBookedTime] = useState<{
     start: string;
@@ -23,6 +24,19 @@ export default function Calendar() {
   }>({ isUpdating: false, gigBooking: null });
   const [bookingDone, setBookingDone] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isFindOpen, setIsFindOpen] = useState(false);
+  const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
+
+  const handleBookingFound = (booking: GigBooking) => {
+    // Sätt datumet så att modalens titel ("Boka YYYY-MM-DD") stämmer överens
+    setSelectedDate(booking.startDate.split("T")[0]);
+
+    // Sätt edit-state med bokningen vi hittade via API-listan
+    setUpdateGigBooking({ isUpdating: true, gigBooking: booking });
+
+    // Öppna den vanliga bokningsmodalen i edit-läge!
+    setIsOpen(true);
+  };
 
   useEffect(() => {
     console.log("bookingDone changed:", bookingDone);
@@ -73,6 +87,13 @@ export default function Calendar() {
           updateGigBooking,
         }}
       />
+      <FindBookingModal
+        isOpen={isFindOpen}
+        setIsOpen={setIsFindOpen}
+        gigBookings={gigBookings}
+        onBookingFound={handleBookingFound}
+        clickedEventId={selectedEventId}
+      />
       <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
@@ -93,11 +114,21 @@ export default function Calendar() {
           setIsOpen(true);
         }}
         eventClick={(info) => {
-          const currentBooking = getBookingById(info.event.id);
-          if (!currentBooking) return toast.error("Hittade inte bokningen");
+          const currengigInLocalStorage = getBookingByIdLocalStorage(
+            info.event.id,
+          );
 
-          setSelectedDate(currentBooking.startDate.split("T")[0]);
-          setUpdateGigBooking({ isUpdating: true, gigBooking: currentBooking });
+          if (!currengigInLocalStorage) {
+            setSelectedEventId(info.event.id); 
+            setIsFindOpen(true);
+            return;
+          }
+
+          setSelectedDate(currengigInLocalStorage.startDate.split("T")[0]);
+          setUpdateGigBooking({
+            isUpdating: true,
+            gigBooking: currengigInLocalStorage,
+          });
           setIsOpen(true);
         }}
       />
