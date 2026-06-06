@@ -59,7 +59,7 @@ export default function GigBookingModal({
   setBookedTime,
   updateGigBooking,
 }: GigBookingModalProps) {
-  const { modifyBooking } = useGigBookings();
+  const { modifyBooking, removeBooking } = useGigBookings();
 
   const {
     register,
@@ -329,11 +329,20 @@ export default function GigBookingModal({
                 <Button
                   type="button"
                   variant="destructive"
-                  onClick={() => {
-                    // 1. Hantera avbokning här via ett server-action eller API
-                    // 2. Ta bort från localStorage
-                    // 3. setIsOpen(false); refresh();
-                    toast.success("Bokningen har avbokats");
+                  onClick={async () => {
+                    if (updateGigBooking.gigBooking) {
+                      try {
+                        // 1. Kör borttagningen via vår hook
+                        await removeBooking(updateGigBooking.gigBooking.id);
+
+                        // 2. Visa bekräftelse och stäng modalen
+                        toast.success("Bokningen har avbokats");
+                        setIsOpen(false);
+                        setBookingDone(!bookingDone);
+                      } catch (error) {
+                        toast.error("Det gick inte att avboka. Försök igen.");
+                      }
+                    }
                   }}
                   className="mr-auto"
                 >
