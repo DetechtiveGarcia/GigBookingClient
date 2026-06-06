@@ -1,6 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
-import { fetchAllGigBookings, updateGigBooking } from "@/lib/actions";
+import {
+  fetchAllGigBookings,
+  updateGigBooking,
+  deleteGigBooking,
+} from "@/lib/actions";
 import { GigBooking, GigBookingRequest } from "@/types";
 
 export function useGigBookings() {
@@ -13,11 +17,11 @@ export function useGigBookings() {
 
   const modifyBooking = async (id: string, updatedData: GigBookingRequest) => {
     const updatedBooking = await updateGigBooking(id, updatedData);
-    
+
     // Uppdatera även localStorage så att den lokala datan matchar repot
     const saved = JSON.parse(localStorage.getItem("myBookings") ?? "[]");
-    const updatedLocalStorage = saved.map((gb: GigBooking) => 
-      gb.id === id ? updatedBooking : gb
+    const updatedLocalStorage = saved.map((gb: GigBooking) =>
+      gb.id === id ? updatedBooking : gb,
     );
     localStorage.setItem("myBookings", JSON.stringify(updatedLocalStorage));
 
@@ -25,14 +29,27 @@ export function useGigBookings() {
     return updatedBooking;
   };
 
+  const removeBooking = async (id: string) => {
+
+    await deleteGigBooking(id);
+
+
+    const saved = JSON.parse(localStorage.getItem("myBookings") ?? "[]");
+    const updatedLocalStorage = saved.filter((gb: GigBooking) => gb.id !== id);
+    localStorage.setItem("myBookings", JSON.stringify(updatedLocalStorage));
+
+  
+    await refresh();
+  };
+
   const getBookingByIdLocalStorage = (id: string): GigBooking | undefined => {
     const saved = JSON.parse(localStorage.getItem("myBookings") ?? "[]");
     return saved.find((gb: GigBooking) => gb.id === id);
-};
+  };
 
   useEffect(() => {
     refresh();
   }, []);
 
-  return { gigBookings, refresh, getBookingByIdLocalStorage, modifyBooking };
+  return { gigBookings, refresh, getBookingByIdLocalStorage, modifyBooking, removeBooking };
 }
