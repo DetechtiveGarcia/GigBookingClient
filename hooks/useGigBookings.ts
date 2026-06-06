@@ -11,7 +11,7 @@ export function useGigBookings() {
     setGigBookings(allBookings);
   };
 
-  const getBookingById = (id: string): GigBooking | undefined => {
+  const getBookingByIdLocalStorage = (id: string): GigBooking | undefined => {
     const saved = JSON.parse(localStorage.getItem("myBookings") ?? "[]");
     return saved.find((gb: GigBooking) => gb.id === id);
 };
@@ -20,5 +20,5 @@ export function useGigBookings() {
     refresh();
   }, []);
 
-  return { gigBookings, refresh, getBookingById };
+  return { gigBookings, refresh, getBookingByIdLocalStorage };
 }
