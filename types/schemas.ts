@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const createGigBookingSchema = z.object({
+export const GigBookingSchema = z.object({
   startTime: z.string().min(1, "Starttid är obligatorisk"),
   endTime: z.string().min(1, "Sluttid är obligatorisk"),
   street: z.string().min(1, "Gata är obligatorisk"),
@@ -18,4 +18,4 @@ export const findBookingSchema = z.object({
 });
 
 export type FindBookingForm = z.infer<typeof findBookingSchema>;
-export type CreateGigBookingForm = z.infer<typeof createGigBookingSchema>;
+export type GigBookingForm = z.infer<typeof GigBookingSchema>;
