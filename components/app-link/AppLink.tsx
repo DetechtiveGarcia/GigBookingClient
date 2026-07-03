@@ -5,5 +5,5 @@ type LinkProps = {
     linkStyle: 'app-link' | 'app-link-btn' 
 }
 export default function AppLink({ href, label, linkStyle }: LinkProps){
-    return <a href={href} className={`${linkStyle} font-uppercase letter-spacing center-element-horizontal`}>{label}</a>
+    return <a href={href} className={`${linkStyle} font-uppercase letter-spacing `}>{label}</a>
 }
