@@ -317,8 +317,9 @@
 }
 
 body{
-  background: rgb(17, 10, 1);
-  font-size: var(--font-size-sm);
+  /* background: rgb(17, 10, 1); */
+  background: black;
+  font-size: var(--font-size-xs);
 }
 
 .font-uppercase{
@@ -345,11 +346,22 @@ body{
   color: var(--text-color-white);
 }
 
+.text-dark{
+  color: var(--text-color-dark);
+}
+
 .letter-spacing{
   letter-spacing: 2.5px;
 }
 
-
 .center-element-horizontal{
   justify-self: center;
+}
+
+.center-element-vertical{
+  justify-self: center;
+}
+
+.sides-padding{
+  padding: 0 2rem;
 }
