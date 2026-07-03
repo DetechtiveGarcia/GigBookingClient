@@ -1,56 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap");
-
-
-@import url("https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&display=swap");
-
-
-p {
-  margin: 0;
-}
-
-.pinyon-script-regular {
-  font-family: "Pinyon Script", cursive;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 2rem;
-
-  color: lab(94.2538% 1.22291 7.58821);
-}
-
-
-.ballet-font {
-  font-family: "Ballet", cursive;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 2rem;
-}
-
-.white {
-  color: lab(94.2538% 1.22291 7.58821);
-}
-
-
-
-.outline-text {
-  -webkit-text-stroke: 0.8px;
-  -webkit-text-fill-color: transparent;
-}
-
-.orange {
-  color: lab(71.4961% 33.6324 64.9062);
-}
-
 header {
   position: fixed;
   height: 50px;
   width: 100%;
   background-color: rgb(17 10 1 / 70%);
   backdrop-filter: blur(10px) saturate(150%);
-  display: flex;
+
+  display: grid;
+  grid-template-columns: 100px 1fr 100px;
   align-items: center;
-  padding: 2rem 1rem;
-  span{
-    margin-top: 12px;
-  }
+  padding: 0 1rem;
 }
