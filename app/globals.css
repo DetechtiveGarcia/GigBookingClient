@@ -318,4 +318,38 @@
 
 body{
   background: rgb(17, 10, 1);
+  font-size: var(--font-size-sm);
+}
+
+.font-uppercase{
+    text-transform: uppercase;
+}
+
+.serif {
+  font-family: var(--font-instrument-serif), serif;
+}
+
+.italic{
+  font-style: italic;
+}
+
+.text-orange{
+  color: var(--text-color-orange)
+}
+
+.bg-orange{
+  background: var(--bg-color-orange);
+}
+
+.text-white {
+  color: var(--text-color-white);
+}
+
+.letter-spacing{
+  letter-spacing: 2.5px;
+}
+
+
+.center-element-horizontal{
+  justify-self: center;
 }
