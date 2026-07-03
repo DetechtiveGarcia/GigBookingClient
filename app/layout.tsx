@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Instrument_Serif } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner"
 import Header from "@/components/header/Header";
+import Footer from "@/components/footer/Footer";
 import "./globals.css";
 import './theme.css'
 
@@ -34,6 +35,7 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Toaster />
+        <Footer/>
       </body>
     </html>
   );
