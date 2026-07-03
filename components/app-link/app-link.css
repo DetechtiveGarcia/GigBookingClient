@@ -1,0 +1,18 @@
+.app-link {
+  color: #9b8c7c;
+  transition: all 0.2s ease-out;
+
+  &:hover {
+    color: #f6ede0;
+  }
+}
+
+.app-link-btn {
+  transition: all 0.2s ease-out;
+  text-align: center;
+  border: 1px var(--color-orange) solid;
+  color: var(--color-orange);
+  padding: 0.5rem 1rem;
+
+
+}
