@@ -4,10 +4,12 @@ import Navigation from "../navigation/Navigation";
 import "./header.css";
 export default function Header() {
   return (
-    <header>
-      <Logo />
-      <Navigation />
-      <AppLink href="/booking" label="boka" linkStyle="app-link-btn" />
-    </header>
+    <div className="header-container">
+      <header className="sides-padding">
+        <Logo />
+        <Navigation />
+        <AppLink href="/booking" label="boka" linkStyle="app-link-btn" />
+      </header>
+    </div>
   );
 }
