@@ -1,0 +1,13 @@
+:root {
+  font-family: var(--font-inter), sans-serif;
+  --font-size-sm: 12px;
+  --font-size-md: 20px;
+  --color-orange: lab(71.4961% 33.6324 64.9062);
+  --color-white: lab(94.2538% 1.22291 7.58821);
+
+  --text-color-white: var(--color-white);
+  --bg-color-white: var(--color-white);
+
+  --text-color-orange: var(--color-orange);
+  --bg-color-orange: var(--color-orange);
+}
