@@ -1,0 +1,8 @@
+.external-link {
+  color: var(--text-color-dark);
+  transition: all 0.2s ease-out;
+
+  &:hover{
+    color: var(--text-color-orange);
+  }
+}
