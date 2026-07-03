@@ -3,7 +3,7 @@ import "./logo.css";
 export default function Logo() {
   return (
     <>
-      <div className="logo center-element-horizontal">
+      <div className="logo">
         {/* <span className="ballet-font text-white">T</span>
         <span className="pinyon-script-regular text-white outline-text">e</span>
         <span className="pinyon-script-regular text-white">moll</span>
