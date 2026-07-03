@@ -1,0 +1,7 @@
+nav{
+    justify-self: center;
+    ul{
+        display: flex;
+        gap: 15px;
+    }
+}
