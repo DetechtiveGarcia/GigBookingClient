@@ -25,4 +25,7 @@
 
   --text-color-dark: var(--color-dark);
   --text-color-hover: var(--color-hover);
+
+  --border-color-dark: #4425024d;
+  --bg-color-dark: #2726264d;
 }
