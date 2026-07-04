@@ -1,0 +1,17 @@
+.booking-form-container{
+    max-width: 500px;
+    border: 1px var(--border-color-dark) solid;
+    padding: 2rem;
+}
+
+.form-header {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  h6 {
+    font-size: var(--font-size-3xl);
+  }
+  p{
+    font-size: var(--font-size-sm);
+  }
+}
