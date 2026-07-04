@@ -1,12 +1,14 @@
 .listen-container {
   display: flex;
-    justify-content: center;
-    align-items: center;
-  p {
-    font-size: var(--font-size-base);
-  }
+  justify-content: center;
+  align-items: center;
+
   .header-layout {
     max-width: 500px;
+    p {
+      font-size: var(--font-size-base);
+      margin-top: 1.5rem;
+    }
   }
   .listen-playlist-container {
     width: 720px;
@@ -14,8 +16,6 @@
   .listen-playlist {
     padding: 0.5rem;
     border: 1px var(--border-color-dark) solid;
-    background-color: var(--bg-color-dark);    
-
-
-}
+    background-color: var(--bg-color-dark);
+  }
 }
