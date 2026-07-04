@@ -3,7 +3,7 @@ import BookingForm from "./BookingForm";
 import "./booking.css";
 export default function Booking() {
   return (
-<section className="wrapper">
+    <section className="wrapper" id="booking">
       <div className="booking-container">
         <SectionHeader
           sectionLabel="04 / boka"
@@ -13,7 +13,7 @@ export default function Booking() {
             </>
           }
         />
-        <BookingForm/>
+        <BookingForm />
       </div>
     </section>
   );
