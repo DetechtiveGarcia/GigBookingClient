@@ -25,27 +25,20 @@ export default function Artist() {
             sectionLabel="03 / Om mig"
             sectionHeading={
               <>
-                The <span className="italic">artist</span>.
+                <span className="italic">Artisten.</span>
               </>
             }
           />
         </div>
         <div className="artist-description">
           <p className="italic text-white serif">
-            "I want every note to sound like it could have been the last one."
+            "Jag vill att varje ton ska låta som om den kunde ha varit den sista."
           </p>
           <p className="text-dark">
-            Kade Ronan is a guitarist and composer based between Marfa and
-            Brooklyn. Drawing from American Primitive, post-rock, and ambient
-            traditions, his playing balances precision with patience — built on
-            warm tube amps, dusty pedals, and a 1962 hollow-body that has
-            followed him from his first dive-bar shows to the world's quietest
-            concert halls. 
+            Temolldur är gitarrist och kompositör baserad mellan himmel och jord. Med inspiration från amerikanska primitiv-, postrock- och ambient- traditioner balanserar hans spel precision med tålamod - byggt på varma rörförstärkare, dammiga pedaler och en hollow-body från 1962 som har följt honom från hans första spelningar på barer till världens tystaste konserthus.
           </p>
             <br />
-          <p className="text-dark">Since 2019 he has released four albums, toured across three
-            continents, and collaborated with artists including Julien Wells,
-            The Hollow Coast, and the Marfa Choir Collective.</p>
+          <p className="text-dark">Sedan 2019 har han släppt fyra album, turnerat över tre kontinenter och samarbetat med artister som Petter, Svenska Björnstammen och <span className="italic">fcking</span> Snoop Dogg.</p>
           <hr />
           <div className="metrics-container">
             <ul className="metrics-list">

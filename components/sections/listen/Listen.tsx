@@ -10,14 +10,15 @@ export default function Listen() {
             sectionLabel="01 / Nu spelas"
             sectionHeading={
               <>
-                The new <span className="italic">record</span>, in full.
+                Det nya <span className="italic">albumet</span> <br /> i sin
+                helhet.
               </>
             }
           />
           <p className="text-dark">
-            Ember Choir is the third full-length from Kade Ronan — a meditation
-            on warmth, distance, and the resonance of an empty room. Press play
-            and let it run.
+            Kärlek-album är Temolldurs tredje fullängdsverk — en meditation om
+            värme, avstånd och resonansen i ett tomt rum. Tryck på play och låt
+            det rinna.
           </p>
         </div>
         <div className="listen-playlist-container">

@@ -9,32 +9,32 @@ import AlbumItem from "./AlbumItem";
 export default function Discography() {
   const albumList = [
     {
-      title: "Ember Choir",
+      title: "Ember Kören",
       trackCountOfAlbum: 11,
       img: album1,
-      alt: "Bild på album Ember Choir",
-      releaseDate: 2026
+      alt: "Bild på omslaget av albumet Ember Kören",
+      releaseDate: 2026,
     },
     {
-      title: "Low Frequencies",
+      title: "Låga Frekvenser",
       trackCountOfAlbum: 9,
       img: album2,
-      alt: "Bild på album Low Frequencies",
-      releaseDate: 2023
+      alt: "Bild på omslaget av albumet Låga frekvenser",
+      releaseDate: 2023,
     },
     {
-      title: "Brass & Copper",
+      title: "Mässing & Koppar",
       trackCountOfAlbum: 5,
       img: album3,
-      alt: "Bild på album Brass & Copper",
-      releaseDate: 2021
+      alt: "Bild på omslaget av albumet Mässing & Koppar",
+      releaseDate: 2021,
     },
     {
-      title: "Hollow Body Sessions",
+      title: "Mjuka Ekon",
       trackCountOfAlbum: 12,
       img: album4,
-      alt: "Bild på album Brass & Copper",
-      releaseDate: 2019
+      alt: "Bild på omslaget av albumet Mjuka Ekon",
+      releaseDate: 2019,
     },
   ];
   return (
@@ -44,19 +44,30 @@ export default function Discography() {
           <SectionHeader
             sectionLabel="02 / Discography"
             sectionHeading={
-              <>A decade of {<span className="italic">six strings</span>}.</>
+              <>
+                Ett decenium med {<span className="italic">sex strängar.</span>}
+              </>
             }
           />
           <p className="text-white text-dark">
-            Four records. Countless late nights. Every release self-produced in
-            collaboration with a small circle of trusted players.
+            Fyra skivor. Otaliga sena kvällar. Varje utgåva egenproducerad i
+            samarbete med en liten krets av betrodda musiker.
           </p>
         </div>
         <div className="album-grid">
           <ul className="album-list">
             {albumList &&
-              albumList.map((album) => <li key={album.title}><AlbumItem title={album.title} img={album.img} trackCountOfAlbum={album.trackCountOfAlbum} releaseDate={album.releaseDate} alt={album.alt} /></li>
-              )}
+              albumList.map((album) => (
+                <li key={album.title}>
+                  <AlbumItem
+                    title={album.title}
+                    img={album.img}
+                    trackCountOfAlbum={album.trackCountOfAlbum}
+                    releaseDate={album.releaseDate}
+                    alt={album.alt}
+                  />
+                </li>
+              ))}
           </ul>
         </div>
       </div>
