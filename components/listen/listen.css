@@ -1,0 +1,6 @@
+.listen-container{
+    display: flex;
+    p{
+        font-size: var(--font-size-base);
+    }
+}
