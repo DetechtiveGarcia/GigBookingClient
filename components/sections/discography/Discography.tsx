@@ -4,7 +4,7 @@ import album3 from "@/public/album-3.jpg";
 import album4 from "@/public/album-4.jpg";
 import SectionHeader from "@/components/section-header/SectionHeader";
 import "./discography.css";
-import TrackItem from "./TrackItem";
+import AlbumItem from "./AlbumItem";
 
 export default function Discography() {
   const albumList = [
@@ -55,7 +55,7 @@ export default function Discography() {
         <div className="album-grid">
           <ul className="album-list">
             {albumList &&
-              albumList.map((album) => <li key={album.title}><TrackItem title={album.title} img={album.img} trackCountOfAlbum={album.trackCountOfAlbum} releaseDate={album.releaseDate} alt={album.alt} /></li>
+              albumList.map((album) => <li key={album.title}><AlbumItem title={album.title} img={album.img} trackCountOfAlbum={album.trackCountOfAlbum} releaseDate={album.releaseDate} alt={album.alt} /></li>
               )}
           </ul>
         </div>

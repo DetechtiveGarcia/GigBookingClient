@@ -2,20 +2,20 @@ import Image, { StaticImageData } from "next/image";
 import "./track-item.css";
 
 Image;
-type TrackItemProps = {
+type AlbumItemProps = {
   title: string;
   img: StaticImageData;
   trackCountOfAlbum: number;
   alt: string;
   releaseDate: number;
 };
-export default function TrackItem({
+export default function AlbumItem({
   title,
   img,
   trackCountOfAlbum,
   alt,
   releaseDate
-}: TrackItemProps) {
+}: AlbumItemProps) {
   return (
     <div className="track-container">
       <Image src={img} alt={alt} width={300} height={300} />
