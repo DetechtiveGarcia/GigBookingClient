@@ -11,10 +11,9 @@ export default function Footer() {
       </div>
       <div>
         <ul>
-            <li><ExternalLink href="www.youtube.com" label="youtube"/></li>
-            <li><ExternalLink href="www.youtube.com" label="youtube"/></li>
-            <li><ExternalLink href="www.youtube.com" label="youtube"/></li>
-            <li><ExternalLink href="www.youtube.com" label="youtube"/></li>
+            <li><ExternalLink href="https://www.instagram.com/" label="instagram"/></li>
+            <li><ExternalLink href="https://www.youtube.com/" label="youtube"/></li>
+            <li><ExternalLink href="https://www.spotify.com/se/premium/" label="spotify"/></li>
         </ul>
       </div>
     </footer>
