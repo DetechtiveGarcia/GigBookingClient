@@ -325,6 +325,19 @@ section{
   padding: 6rem 0;
 }
 
+button{
+  background: var(--color-orange);
+  color: black;
+  height: 30px;
+  transition: all 0.2s ease-out;
+  font-size: var(--font-size-sm);
+}
+
+button:hover{
+  background: var(--color-white);
+  cursor: pointer;
+}
+
 .font-uppercase {
   text-transform: uppercase;
 }
