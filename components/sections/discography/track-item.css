@@ -1,0 +1,17 @@
+.track-container{
+    display: flex;
+    flex-direction: column;
+
+    h4{
+        font-size: var(--font-size-2xl);
+        margin: .5rem 0 0;
+    }
+}
+
+.album-name-n-release{
+    display: flex;
+    justify-content: space-between;
+    p{
+        align-self: flex-end;
+    }
+}
