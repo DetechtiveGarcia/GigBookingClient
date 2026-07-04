@@ -6,13 +6,13 @@ export default function Navigation() {
     <nav>
       <ul>
         <li>
-          <AppLink href="/listen" label="lyssna" linkStyle="app-link" />
+          <AppLink toSectionId="listen" label="lyssna" linkStyle="app-link" />
         </li>
         <li>
-          <AppLink href="/discography" label="diskografi" linkStyle="app-link"/>
+          <AppLink toSectionId="discography" label="diskografi" linkStyle="app-link"/>
         </li>
         <li>
-          <AppLink href="/about" label="om mig" linkStyle="app-link"/>
+          <AppLink toSectionId="about" label="om mig" linkStyle="app-link"/>
         </li>
       </ul>
     </nav>

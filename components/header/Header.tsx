@@ -8,7 +8,7 @@ export default function Header() {
       <header className="sides-padding">
         <Logo />
         <Navigation />
-        <AppLink href="/booking" label="boka" linkStyle="app-link-btn" />
+        <AppLink toSectionId="booking" label="boka" linkStyle="app-link-btn" />
       </header>
     </div>
   );
