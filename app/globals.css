@@ -361,3 +361,6 @@ body {
   padding: 0 2rem;
 }
 
+.section-header{
+  line-height: 1;
+}
