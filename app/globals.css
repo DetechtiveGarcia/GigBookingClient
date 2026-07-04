@@ -4,7 +4,6 @@
 
 @custom-variant dark (&:is(.dark *));
 :root {
-
   /* --fc-button-bg-color: #7C3AED;
   --fc-button-border-color: #7C3AED;
   --fc-button-hover-bg-color: #6D28D9;
@@ -91,7 +90,6 @@
 /* Kalenderrutan */
 .fc-view-harness {
   border-radius: var(--radius);
-
 }
 
 /* Ta bort tabellkänslan */
@@ -103,7 +101,6 @@
 
 .fc-theme-standard .fc-scrollgrid {
   border-radius: var(--radius);
-
 }
 
 /* Dagceller */
@@ -122,7 +119,7 @@
   border: none !important;
   padding: 2px 6px !important;
   font-size: 12px !important;
-  background: #7C3AED !important;
+  background: #7c3aed !important;
 }
 
 /* Header */
@@ -157,7 +154,6 @@
 }
 
 @theme inline {
-
   --font-heading: var(--font-sans);
 
   --font-sans: var(--font-geist-sans);
@@ -240,7 +236,6 @@
 }
 
 .dark {
-
   --background: oklch(0.145 0 0);
 
   --foreground: oklch(0.985 0 0);
@@ -316,29 +311,29 @@
   }
 }
 
-body{
+body {
   /* background: rgb(17, 10, 1); */
   background: black;
   font-size: var(--font-size-xs);
 }
 
-.font-uppercase{
-    text-transform: uppercase;
+.font-uppercase {
+  text-transform: uppercase;
 }
 
 .serif {
   font-family: var(--font-instrument-serif), serif;
 }
 
-.italic{
+.italic {
   font-style: italic;
 }
 
-.text-orange{
-  color: var(--text-color-orange)
+.text-orange {
+  color: var(--text-color-orange);
 }
 
-.bg-orange{
+.bg-orange {
   background: var(--bg-color-orange);
 }
 
@@ -346,22 +341,23 @@ body{
   color: var(--text-color-white);
 }
 
-.text-dark{
+.text-dark {
   color: var(--text-color-dark);
 }
 
-.letter-spacing{
+.letter-spacing {
   letter-spacing: 2.5px;
 }
 
-.center-element-horizontal{
+.center-element-horizontal {
   justify-self: center;
 }
 
-.center-element-vertical{
+.center-element-vertical {
   justify-self: center;
 }
 
-.sides-padding{
+.sides-padding {
   padding: 0 2rem;
 }
+
