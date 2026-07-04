@@ -1,0 +1,7 @@
+.metric-card-container{
+
+    h5{
+        font-size: var(--font-size-5xl);
+    }
+
+}
