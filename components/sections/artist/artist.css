@@ -14,8 +14,12 @@
   max-width: 600px;
   p:nth-child(1) {
     font-size: var(--font-size-2xl);
+    margin-bottom: 1rem;
   }
   p {
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-lg);
+  }
+  hr{
+    margin: 1.5rem 0;
   }
 }
