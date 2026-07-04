@@ -1,9 +1,10 @@
+import Link from 'next/link';
 import './app-link.css'
 type LinkProps = {
-    href: string;
+    toSectionId: string;
     label: string;
     linkStyle: 'app-link' | 'app-link-btn' 
 }
-export default function AppLink({ href, label, linkStyle }: LinkProps){
-    return <a href={href} className={`${linkStyle} font-uppercase letter-spacing `}>{label}</a>
+export default function AppLink({ toSectionId, label, linkStyle }: LinkProps){
+    return <Link href={`/#${toSectionId}`} className={`${linkStyle} font-uppercase letter-spacing `}>{label}</Link>
 }
