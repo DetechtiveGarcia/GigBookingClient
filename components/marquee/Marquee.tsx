@@ -2,11 +2,7 @@ import MarqueeText from "./MarqueeText";
 import "./marquee.css";
 
 export default function Marquee() {
-  const textList = [
-    "Ember Choir",
-    "Ute nu",
-    "Spotify",
-  ];
+  const textList = ["Ember Kören", "Ute nu", "Spotify"];
 
   return (
     <section className="marquee-container">
@@ -19,6 +15,21 @@ export default function Marquee() {
           ))}
         </ul>
 
+        <ul className="marquee-list" aria-hidden="true">
+          {textList.map((text, i) => (
+            <li key={i} className="marquee-list-item">
+              <MarqueeText text={text} />
+            </li>
+          ))}
+        </ul>
+
+        <ul className="marquee-list" aria-hidden="true">
+          {textList.map((text, i) => (
+            <li key={i} className="marquee-list-item">
+              <MarqueeText text={text} />
+            </li>
+          ))}
+        </ul>
         <ul className="marquee-list" aria-hidden="true">
           {textList.map((text, i) => (
             <li key={i} className="marquee-list-item">
