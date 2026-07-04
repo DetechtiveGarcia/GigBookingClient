@@ -1,0 +1,11 @@
+.discography-container{
+    .header-layout{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        p{
+            font-size: var(--font-size-sm);
+            max-width: 325px;
+        }
+    }
+}
