@@ -1,0 +1,15 @@
+.hero-album-container {
+  h1 {
+    font-size: calc(var(--font-size-7xl) + 5rem);
+    line-height: 0.85;
+    margin: 1rem 0;
+  }
+  p{
+    margin: 1rem 0 2rem 0;
+    font-size: var(--font-size-lg);
+  }
+}
+
+.hero-album-description {
+  max-width: 400px;
+}
