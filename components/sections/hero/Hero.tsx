@@ -1,4 +1,4 @@
-import LatestAlbum from "../latest-album/LatestAlbum";
+import LatestAlbum from "../../latest-album/LatestAlbum";
 import "./hero.css";
 export default function Hero() {
   return (

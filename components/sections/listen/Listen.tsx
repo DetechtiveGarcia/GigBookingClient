@@ -1,4 +1,4 @@
-import SectionHeader from "../section-header/SectionHeader";
+import SectionHeader from "../../section-header/SectionHeader";
 import "./listen.css";
 
 export default function Listen() {
