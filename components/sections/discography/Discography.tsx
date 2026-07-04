@@ -4,8 +4,39 @@ import album3 from "@/public/album-3.jpg";
 import album4 from "@/public/album-4.jpg";
 import SectionHeader from "@/components/section-header/SectionHeader";
 import "./discography.css";
+import TrackItem from "./TrackItem";
 
 export default function Discography() {
+  const albumList = [
+    {
+      title: "Ember Choir",
+      trackCountOfAlbum: 11,
+      img: album1,
+      alt: "Bild på album Ember Choir",
+      releaseDate: 2026
+    },
+    {
+      title: "Low Frequencies",
+      trackCountOfAlbum: 9,
+      img: album2,
+      alt: "Bild på album Low Frequencies",
+      releaseDate: 2023
+    },
+    {
+      title: "Brass & Copper",
+      trackCountOfAlbum: 5,
+      img: album3,
+      alt: "Bild på album Brass & Copper",
+      releaseDate: 2021
+    },
+    {
+      title: "Hollow Body Sessions",
+      trackCountOfAlbum: 12,
+      img: album4,
+      alt: "Bild på album Brass & Copper",
+      releaseDate: 2019
+    },
+  ];
   return (
     <section>
       <div className="discography-container">
@@ -22,9 +53,11 @@ export default function Discography() {
           </p>
         </div>
         <div className="album-grid">
-            <ul>
-
-            </ul>
+          <ul className="album-list">
+            {albumList &&
+              albumList.map((album) => <li key={album.title}><TrackItem title={album.title} img={album.img} trackCountOfAlbum={album.trackCountOfAlbum} releaseDate={album.releaseDate} alt={album.alt} /></li>
+              )}
+          </ul>
         </div>
       </div>
     </section>
