@@ -1,0 +1,6 @@
+.marquee-text {
+  display: flex;
+  gap: 50px;
+  font-size: calc(var(--font-size-5xl) + 8px);
+  white-space: nowrap;
+}

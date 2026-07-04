@@ -1,0 +1,27 @@
+.marquee-container {
+  background-color: #2726264d;
+  overflow: hidden;
+  border: 1px #4425024d solid;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 50px;
+  --duration: 45s;
+  animation: marquee var(--duration) linear infinite;
+}
+
+.marquee-list {
+  display: flex;
+  gap: 50px;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
