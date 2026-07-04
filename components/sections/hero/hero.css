@@ -24,3 +24,8 @@
 
 }
 
+@media (min-width: 1200px) {
+  .hero {
+    background-position: center 20%;
+  }
+}
