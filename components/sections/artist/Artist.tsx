@@ -18,7 +18,7 @@ const metricList = [
 ];
 export default function Artist() {
   return (
-<section className="wrapper">
+<section className="wrapper" id="about">
       <div className="artist-container">
         <div className="header-layout">
           <SectionHeader

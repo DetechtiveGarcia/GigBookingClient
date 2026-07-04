@@ -38,7 +38,7 @@ export default function Discography() {
     },
   ];
   return (
-    <section className="wrapper">
+    <section className="wrapper" id="discography">
       <div className="discography-container">
         <div className="header-layout">
           <SectionHeader

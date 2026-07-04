@@ -3,7 +3,7 @@ import "./listen.css";
 
 export default function Listen() {
   return (
-    <section className="wrapper">
+    <section className="wrapper" id="listen">
       <div className="listen-container">
         <div className="header-layout">
           <SectionHeader
