@@ -10,7 +10,7 @@ export default function SectionHeader({ sectionLabel, sectionHeading }: SectionH
 
   return (
     <div className="section-header">
-      <span className="section-label">{sectionLabel}</span>
+      <span className="section-label uppercase">{sectionLabel}</span>
       <h2 className="section-heading serif text-white">{sectionHeading}</h2>
     </div>
   );
