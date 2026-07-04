@@ -3,6 +3,8 @@
 import Calendar from "@/components/Calendar";
 import Hero from "@/components/hero/Hero";
 import Marquee from "@/components/marquee/Marquee";
+import Listen from "@/components/listen/Listen";
+
 // import "@fullcalendar/common/main.css";
 // import "@fullcalendar/daygrid/main.css";
 
@@ -15,6 +17,7 @@ export default function Home() {
       {/* <Calendar /> */}
       <Hero/>
       <Marquee />
+      <Listen/>
     </>
   );
 }
