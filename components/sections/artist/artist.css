@@ -1,0 +1,21 @@
+.artist-container {
+  display: flex;
+  justify-self: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.metrics-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.artist-description {
+  max-width: 600px;
+  p:nth-child(1) {
+    font-size: var(--font-size-2xl);
+  }
+  p {
+    font-size: var(--font-size-base);
+  }
+}
