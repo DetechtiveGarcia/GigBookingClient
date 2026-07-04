@@ -1,7 +1,7 @@
 .marquee-container {
-  background-color: #2726264d;
+  background-color: var(--bg-color-dark);
   overflow: hidden;
-  border: 1px #4425024d solid;
+  border: 1px var(--border-color-dark) solid;
 }
 
 .marquee-track {
