@@ -1,0 +1,20 @@
+input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid oklch(0.25 0.02 60); /* border-border */
+  padding-top: 0.5rem;                /* py-2 */
+  padding-bottom: 0.5rem;
+  font-size: 0.875rem;                /* text-sm */
+  outline: none;                      /* outline-none */
+  color: inherit;
+  transition: border-color 150ms ease;
+}
+
+input:focus {
+  border-bottom-color: oklch(0.76 0.16 60); /* focus:border-ember */
+}
+
+label{
+    font-size: 10px;
+}
