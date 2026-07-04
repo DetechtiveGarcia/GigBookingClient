@@ -3,7 +3,7 @@ import Logo from "../logo/Logo";
 import "./footer.css";
 export default function Footer() {
   return (
-    <footer>
+    <footer className="wrapper">
       <div className="center-element-vertical">
         <Logo />
 

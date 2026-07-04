@@ -3,7 +3,7 @@ import "./listen.css";
 
 export default function Listen() {
   return (
-    <section>
+    <section className="wrapper">
       <div className="listen-container">
         <div className="header-layout">
           <SectionHeader
@@ -17,7 +17,7 @@ export default function Listen() {
           />
           <p className="text-dark">
             Kärlek-album är Temolldurs tredje fullängdsverk — en meditation om
-            värme, avstånd och resonansen i ett tomt rum. Tryck på play och låt
+            värme, avstånd och resonansen i ett tomt rum. Tryck på play &#x25B6; och låt
             det rinna.
           </p>
         </div>
