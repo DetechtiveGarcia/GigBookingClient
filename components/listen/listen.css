@@ -1,6 +1,21 @@
-.listen-container{
-    display: flex;
-    p{
-        font-size: var(--font-size-base);
-    }
+.listen-container {
+  display: flex;
+    justify-content: center;
+    align-items: center;
+  p {
+    font-size: var(--font-size-base);
+  }
+  .header-layout {
+    max-width: 500px;
+  }
+  .listen-playlist-container {
+    width: 720px;
+  }
+  .listen-playlist {
+    padding: 0.5rem;
+    border: 1px var(--border-color-dark) solid;
+    background-color: var(--bg-color-dark);    
+
+
+}
 }
