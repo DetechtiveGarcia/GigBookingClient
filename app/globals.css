@@ -311,6 +311,10 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   /* background: rgb(17, 10, 1); */
   background: black;
