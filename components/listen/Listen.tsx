@@ -10,7 +10,7 @@ export default function Listen() {
             sectionLabel="01 / Nu spelas"
             sectionHeading={
               <>
-                The new <span className="italic">record</span>, in full
+                The new <span className="italic">record</span>, in full.
               </>
             }
           />
@@ -20,7 +20,20 @@ export default function Listen() {
             and let it run.
           </p>
         </div>
-        <div className="listen-playlist"></div>
+        <div className="listen-playlist-container">
+          <div className="listen-playlist">
+            <iframe
+              data-testid="embed-iframe"
+              style={{ borderRadius: "12px" }}
+              src="https://open.spotify.com/embed/album/7JTZc7mSQGxw1Iqabx6XQE?utm_source=generator&theme=0&si=1cac31dd345a49ca"
+              width="100%"
+              height="500"
+              frameBorder="0"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+            ></iframe>
+          </div>
+        </div>
       </div>
     </section>
   );
