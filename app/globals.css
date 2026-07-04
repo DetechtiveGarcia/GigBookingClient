@@ -317,6 +317,10 @@ body {
   font-size: var(--font-size-xs);
 }
 
+section{
+  padding: 6rem 0;
+}
+
 .font-uppercase {
   text-transform: uppercase;
 }
