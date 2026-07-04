@@ -12,7 +12,7 @@
   flex-direction: column;
   justify-content: flex-end;
 
-  & > span::before {
+  .wrapper > span::before {
     content: "";
     display: inline-block;
     height: 1px;
