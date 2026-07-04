@@ -368,3 +368,8 @@ section{
 .section-header{
   line-height: 1;
 }
+
+.wrapper {
+  width: min(100% - 4rem, 1400px);
+  margin-inline: auto;
+}
