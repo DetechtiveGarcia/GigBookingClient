@@ -1,4 +1,3 @@
-import Link from "next/link"
 import './external-link.css'
 
 type LinkProps = {
@@ -6,5 +5,5 @@ type LinkProps = {
     label: string;
 }
 export default function ExternalLink({ href, label }: LinkProps){
-    return <Link href={href} target="_blank" className="external-link letter-spacing uppercase">{label}</Link>
+    return <a href={href} target="_blank" className="external-link letter-spacing uppercase" rel="noopener noreferrer">{label}</a>
 }
