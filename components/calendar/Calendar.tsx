@@ -1,14 +1,15 @@
 "use client";
-import FindBookingModal from "./FindBookingModal";
+import FindBookingModal from "../FindBookingModal";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import svLocale from "@fullcalendar/core/locales/sv";
-import GigBookingModal from "./GigBookingModal";
+import GigBookingModal from "../GigBookingModal";
 import { toast } from "sonner";
 import { useState, useEffect } from "react";
 import { useGigBookings } from "@/hooks/useGigBookings";
 import { GigBooking } from "@/types";
+import './calendar.css'
 // import "@fullcalendar/common/main.css";
 // import "@fullcalendar/daygrid/main.css";
 export default function Calendar() {
@@ -74,8 +75,8 @@ export default function Calendar() {
     setBookingDone(false);
   }, [bookingDone]);
   return (
-    <div className="max-w-xl mx-auto">
-      <h1 className="text-4xl font-bold mb-6">Bokningskalender</h1>
+    <div className="calendar-container">
+      <h2 className="text-white serif">Bokningskalender</h2>
       <GigBookingModal
         {...{
           isOpen,
