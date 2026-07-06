@@ -6,7 +6,7 @@ export default function Booking() {
   return (
     <section className="wrapper" id="booking">
       <div className="booking-container">
-        {/* <SectionHeader
+        <SectionHeader
           sectionLabel="04 / boka"
           sectionHeading={
             <>
@@ -14,10 +14,10 @@ export default function Booking() {
             </>
           }
         />
-        <BookingForm /> */}
+        <BookingForm />
 
-          <Calendar />
- 
+          {/* <Calendar />
+  */}
       </div>
     </section>
   );
