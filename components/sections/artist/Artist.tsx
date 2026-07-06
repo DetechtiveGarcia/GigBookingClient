@@ -17,6 +17,12 @@ const metricList = [
   },
 ];
 export default function Artist() {
+  /*
+   TODO: lägg till att det är 3 timmar 
+      1h covers
+      1h egna låtar
+      1h inspelad material/improvisation
+  */
   return (
 <section className="wrapper" id="about">
       <div className="artist-container">
