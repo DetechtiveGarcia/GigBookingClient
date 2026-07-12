@@ -19,3 +19,10 @@
     background-color: var(--bg-color-dark);
   }
 }
+
+@media (min-width: 1200px){
+  .listen-container{
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
