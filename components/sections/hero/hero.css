@@ -29,3 +29,9 @@
     background-position: center 20%;
   }
 }
+
+@media (max-width: 1200px){
+  .hero{
+    padding: 0;
+  }
+}
