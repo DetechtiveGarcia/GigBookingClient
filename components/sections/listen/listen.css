@@ -20,7 +20,7 @@
   }
 }
 
-@media (min-width: 1200px){
+@media (max-width: 1200px){
   .listen-container{
     flex-direction: column;
     gap: 2rem;
