@@ -18,7 +18,7 @@ export default function AlbumItem({
 }: AlbumItemProps) {
   return (
     <div className="track-container">
-      <Image src={img} alt={alt} width={300} height={300} />
+      <Image src={img} alt={alt} width={250} height={250} />
       <div className="album-name-n-release">
         <h4 className="serif text-white">{title}</h4>
         <p className="text-white">{releaseDate}</p>
