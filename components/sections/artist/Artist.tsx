@@ -37,7 +37,7 @@ export default function Artist() {
           />
         </div>
         <div className="artist-description">
-          <p className="italic text-white serif">
+          <p className="italic text-white serif text-center">
             "Jag vill att varje ton ska låta som om den kunde ha varit den sista."
           </p>
           <p className="text-dark">
