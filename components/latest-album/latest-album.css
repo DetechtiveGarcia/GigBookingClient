@@ -1,6 +1,6 @@
 .hero-album-container {
   h1 {
-    font-size: calc(var(--font-size-7xl) + 5rem);
+    font-size: calc(var(--font-size-7xl) + 3vw);
     line-height: 0.85;
     margin: 1rem 0;
   }
