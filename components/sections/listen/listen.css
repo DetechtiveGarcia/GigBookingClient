@@ -2,8 +2,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 2rem;
 
   .header-layout {
+    flex: 1;
     max-width: 600px;
     p {
       font-size: var(--font-size-base);
@@ -11,7 +13,10 @@
     }
   }
   .listen-playlist-container {
-    width: 720px;
+    width: 100%;
+    max-width: 720px;
+    flex: 1;
+
   }
   .listen-playlist {
     padding: 0.5rem;
@@ -20,8 +25,8 @@
   }
 }
 
-@media (max-width: 1200px){
-  .listen-container{
+@media (max-width: 1200px) {
+  .listen-container {
     flex-direction: column;
     gap: 2rem;
   }
