@@ -1,10 +1,10 @@
 "use server";
+const apiUrl = process.env.NEXT_PUBLIC_API_URL
+
 import { GigBookingRequest, GigBooking } from "@/types";
 export async function fetchAllGigBookings(): Promise<GigBooking[]> {
   try {
-    const data = await fetch(
-      "http://localhost:5002/api/gigbooking/all-bookings",
-    );
+    const data = await fetch(`${apiUrl}/api/gigbooking/all-bookings`);
 
     if (!data.ok) {
       console.log("Something went wrong.");
@@ -24,7 +24,7 @@ export async function createGigBooking(
   gig: GigBookingRequest,
 ): Promise<GigBooking> {
   try {
-    const request = await fetch("http://localhost:5002/api/gigbooking/create", {
+    const request = await fetch(`${apiUrl}/api/gigbooking/create`, {
       method: "POST",
       body: JSON.stringify(gig),
       headers: {
@@ -50,7 +50,7 @@ export async function updateGigBooking(
   gig: GigBookingRequest,
 ): Promise<GigBooking> {
   try {
-    const request = await fetch(`http://localhost:5002/api/gigbooking/update/${id}`, {
+    const request = await fetch(`${apiUrl}/api/gigbooking/update/${id}`, {
       method: "PUT", 
       body: JSON.stringify(gig),
       headers: {
@@ -75,7 +75,7 @@ export async function updateGigBooking(
 
 export async function deleteGigBooking(id: string): Promise<boolean> {
   try {
-    const request = await fetch(`http://localhost:5002/api/gigbooking/delete/${id}`, {
+    const request = await fetch(`${apiUrl}/api/gigbooking/delete/${id}`, {
       method: "DELETE",
     });
 
