@@ -1,38 +1,13 @@
-import styles from './gigs.module.css'
+"use client";
+
+import styles from "./gigs.module.css";
 import Gig from "./gig/Gig";
+import { useGigBookings } from "@/hooks/useGigBookings"; // Justera sökvägen om det behövs
 
-const dates = [
-  {
-    startDate: {
-      dateTime: "2026-07-10T17:00:00.000+00:00",
-    },
-
-    venue: "Trädgårn",
-  },
-  {
-    startDate: {
-      dateTime: "2026-07-18T18:00:00.000+00:00",
-    },
-
-    venue: "Berns Salonger",
-  },
-  {
-    startDate: {
-      dateTime: "2026-08-05T16:30:00.000+00:00",
-    },
-    venue: "Moriskan",
-  },
-];
-
-type GigItem = {
-  startDate: {
-    dateTime: string;
-  };
-  venue: string;
-};
-
-function formatDate(dateTime: string) {
-  const date = new Date(dateTime);
+function formatDate(dateTimeStr: string) {
+  if (!dateTimeStr) return "";
+  
+  const date = new Date(dateTimeStr);
 
   return new Intl.DateTimeFormat("en-US", {
     month: "short",
@@ -41,12 +16,18 @@ function formatDate(dateTime: string) {
 }
 
 export default function Gigs() {
+  const { gigBookings } = useGigBookings();
+
   return (
     <ul className={styles.tourList}>
-      {dates.map((item: GigItem) => {
-        const formatted = formatDate(item.startDate.dateTime);
+      {gigBookings.map((gig) => {
+        const formattedDate = formatDate(gig.startDate);
 
-        return <li key={item.startDate.dateTime}><Gig  date={formatted} venue={item.venue} styles={styles} /></li>
+        return (
+          <li key={gig.id}>
+            <Gig date={formattedDate} venue={gig.venue} styles={styles} />
+          </li>
+        );
       })}
     </ul>
   );
