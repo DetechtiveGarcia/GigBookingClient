@@ -1,4 +1,11 @@
 .booking-container{
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 3rem; 
+
+}
+
+
+.booking-container > :first-child {
+  grid-column: 1 / span 7;
 }
