@@ -6,7 +6,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import {
   Select,
@@ -31,7 +30,7 @@ import { Dispatch, SetStateAction, useEffect } from "react";
 import { GigBookingRequest, GigBooking } from "@/types";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { GigBookingSchema, GigBookingForm } from "@/types/schemas";
+import { GigBookingFormSchema, GigBookingFormValues } from "@/types/schemas";
 import { createGigBooking } from "@/lib/actions";
 import { useGigBookings } from "@/hooks/useGigBookings";
 
@@ -67,8 +66,8 @@ export default function GigBookingModal({
     control,
     reset,
     formState: { errors },
-  } = useForm<GigBookingForm>({
-    resolver: zodResolver(GigBookingSchema),
+  } = useForm<GigBookingFormValues>({
+    resolver: zodResolver(GigBookingFormSchema),
     defaultValues: {
       startTime: "",
       endTime: "",
@@ -117,17 +116,11 @@ export default function GigBookingModal({
     }
   }, [updateGigBooking, isOpen, reset, isEditMode]);
 
-  const onSubmit = async (data: GigBookingForm) => {
+  const onSubmit = async (data: GigBookingFormValues) => {
     try {
-      const payload = {
-        ...data,
+      const requestPayload: GigBookingRequest = {
         startDate: createISOString(selectedDate, data.startTime),
         endDate: createISOString(selectedDate, data.endTime),
-      };
-
-      const request: GigBookingRequest = {
-        startDate: payload.startDate,
-        endDate: payload.endDate,
         street: data.street,
         streetNumber: data.streetNumber,
         zipCode: data.zipCode,
@@ -139,7 +132,7 @@ export default function GigBookingModal({
       };
 
       if (updateGigBooking.isUpdating && updateGigBooking.gigBooking) {
-        await modifyBooking(updateGigBooking.gigBooking.id, payload);
+        await modifyBooking(updateGigBooking.gigBooking.id, requestPayload);
 
         toast.success("Bokningen har uppdaterats!", {
           description: "En ny bekräftelse har sparats.",
@@ -148,7 +141,7 @@ export default function GigBookingModal({
         setBookingDone(!bookingDone);
         setBookedTime({ start: data.startTime, end: data.endTime });
       } else {
-        const booking: GigBooking = await createGigBooking(request);
+        const booking: GigBooking = await createGigBooking(requestPayload);
         const savedGigBookings = JSON.parse(
           localStorage.getItem("myBookings") ?? "[]",
         );
@@ -157,7 +150,7 @@ export default function GigBookingModal({
           JSON.stringify([...savedGigBookings, booking]),
         );
 
-        reset({ startTime: "", endTime: "" });
+        reset();
         setIsOpen(false);
         setBookingDone(!bookingDone);
         setBookedTime({ start: data.startTime, end: data.endTime });
@@ -177,6 +170,7 @@ export default function GigBookingModal({
               Fyll i dina uppgifter för att boka.
             </DialogDescription>
           </DialogHeader>
+
           <FieldGroup>
             <div className="grid grid-cols-2 gap-4">
               <Field>
@@ -205,6 +199,7 @@ export default function GigBookingModal({
                   <FieldError>{errors.startTime.message}</FieldError>
                 )}
               </Field>
+
               <Field>
                 <FieldLabel>Sluttid</FieldLabel>
                 <Controller
@@ -232,6 +227,7 @@ export default function GigBookingModal({
                 )}
               </Field>
             </div>
+
             <div className="grid grid-cols-2 gap-4">
               <Field>
                 <FieldLabel htmlFor="street">Gata</FieldLabel>
@@ -240,10 +236,11 @@ export default function GigBookingModal({
                   placeholder="Storgatan"
                   {...register("street")}
                 />
-                {errors.streetNumber && (
-                  <FieldError>{errors.streetNumber.message}</FieldError>
+                {errors.street && (
+                  <FieldError>{errors.street.message}</FieldError>
                 )}
               </Field>
+
               <Field>
                 <FieldLabel htmlFor="streetNumber">Gatunummer</FieldLabel>
                 <Input
@@ -256,6 +253,7 @@ export default function GigBookingModal({
                 )}
               </Field>
             </div>
+
             <div className="grid grid-cols-2 gap-4">
               <Field>
                 <FieldLabel htmlFor="zipCode">Postnummer</FieldLabel>
@@ -279,6 +277,7 @@ export default function GigBookingModal({
                 {errors.city && <FieldError>{errors.city.message}</FieldError>}
               </Field>
             </div>
+
             <Field>
               <FieldLabel htmlFor="venue">Spelplats</FieldLabel>
               <Input
@@ -288,6 +287,7 @@ export default function GigBookingModal({
               />
               {errors.venue && <FieldError>{errors.venue.message}</FieldError>}
             </Field>
+
             <Field>
               <FieldLabel htmlFor="clientName">Namn</FieldLabel>
               <Input
@@ -299,6 +299,7 @@ export default function GigBookingModal({
                 <FieldError>{errors.clientName.message}</FieldError>
               )}
             </Field>
+
             <Field>
               <FieldLabel htmlFor="clientEmail">Email</FieldLabel>
               <Input
@@ -311,6 +312,7 @@ export default function GigBookingModal({
                 <FieldError>{errors.clientEmail.message}</FieldError>
               )}
             </Field>
+
             <Field>
               <FieldLabel htmlFor="clientPhone">Telefon</FieldLabel>
               <Input
@@ -323,6 +325,7 @@ export default function GigBookingModal({
               )}
             </Field>
           </FieldGroup>
+
           <DialogFooter className="mt-4 flex justify-between">
             {isEditMode ? (
               <>
@@ -332,10 +335,7 @@ export default function GigBookingModal({
                   onClick={async () => {
                     if (updateGigBooking.gigBooking) {
                       try {
-                        // 1. Kör borttagningen via vår hook
                         await removeBooking(updateGigBooking.gigBooking.id);
-
-                        // 2. Visa bekräftelse och stäng modalen
                         toast.success("Bokningen har avbokats");
                         setIsOpen(false);
                         setBookingDone(!bookingDone);

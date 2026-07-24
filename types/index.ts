@@ -1,18 +1,5 @@
 export type GigBooking = {
-  _id: string;
-  StartDate: DateValue;
-  EndDate: DateValue;
-  Street: string;
-  StreetNumber: string;
-  ZipCode: string;
-  City: string;
-  ClientName: string;
-  ClientEmail: string;
-  ClientPhone: string;
-  Venue: string;
-};
-
-export type GigBookingRequest = {
+  id: string;
   startDate: string;
   endDate: string;
   street: string;
@@ -25,12 +12,10 @@ export type GigBookingRequest = {
   venue: string;
 };
 
+export type GigBookingRequest = Omit<GigBooking, "id">;
+
 export type LocalStorageSavedGigBookings = {
   gigBookings: GigBooking[];
-}
-
-type DateValue = {
-  DateTime: string;
-  Ticks: number;
-  Offset: number;
 };
+
+
