@@ -246,3 +246,11 @@
     @apply font-sans;
   }
 } */
+
+.fc-daygrid-event-dot{
+  border-color:var(--color-orange);
+}
+
+.fc-event-time, .fc-event-title{
+  color: black;
+}

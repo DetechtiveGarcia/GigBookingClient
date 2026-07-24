@@ -21,9 +21,9 @@ export default function Booking() {
         </div>
         <BookingForm />
 
-        {/* <Calendar />
-         */}
+
       </div>
+       <Calendar />
     </section>
   );
 }
