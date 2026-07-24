@@ -3,7 +3,7 @@
   flex-direction: column;
   flex: 1;
     h2{
-        font-size: var(--font-size-7xl);
+        font-size: clamp(var(--font-size-3xl), var(--font-size-4xl) + 2vw ,var(--font-size-7xl));
     }
 }
 
