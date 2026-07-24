@@ -4,7 +4,7 @@
     line-height: 0.85;
     margin: 1rem 0;
   }
-  p{
+  p {
     margin: 1rem 0 2rem 0;
     font-size: var(--font-size-lg);
   }
@@ -12,4 +12,15 @@
 
 .hero-album-description {
   max-width: 400px;
+}
+
+@media (max-width: 1200px) {
+  .hero-album-container {
+    p {
+      font-size: calc(var(--font-size-sm) + 0.15vw);
+    }
+  }
+  .hero-album-description {
+    max-width: 325px;
+  }
 }
