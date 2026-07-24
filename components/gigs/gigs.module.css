@@ -1,0 +1,32 @@
+.gigContainer {
+  display: flex;
+  align-items: center;
+}
+
+.monthAndDay {
+  font-family: var(--font-instrument-serif), serif;
+  color: var(--text-color-orange);
+  font-size: var(--font-size-3xl);
+}
+
+.venue {
+  color: var(--text-color-dark);
+  margin: 0 auto;
+  font-size: var(--font-size-sm);
+}
+.tourList {
+
+  border-top: 1px solid oklch(0.25 0.02 60 / 0.6);
+  border-bottom: 1px solid oklch(0.25 0.02 60 / 0.6);
+
+  li {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    transition: background-color 150ms ease;
+    &:not(:last-child) {
+      border-bottom: 1px solid oklch(0.25 0.02 60 / 0.6);
+    }
+  }
+}
