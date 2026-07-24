@@ -84,3 +84,33 @@ button:hover {
   width: min(100% - 4rem, 1400px);
   margin-inline: auto;
 }
+
+.calendar-booking-modal{
+  color: var(--text-color-white);
+  background: black;
+  font-family: var(--font-inter);
+  font-style: italic;
+}
+
+/* Tvinga bakgrunden på alla dropdown-menyer */
+[data-slot="select-content"],
+div[role="listbox"],
+.bg-popover {
+  background-color: black !important;
+  color: white !important;
+  border: 1px solid #333 !important;
+}
+
+/* Om det finns en inre viewport som sätter vit bakgrund */
+[data-slot="select-content"] > div {
+  background-color: black !important;
+}
+
+/* Hovring (som du märkte redan fungerade fint!) */
+[role="option"]:hover,
+[data-slot="select-item"]:hover,
+[data-highlighted] {
+  background-color: #222 !important;
+  color: var(--color-orange, #ffaa00) !important;
+  cursor: pointer;
+}
