@@ -9,3 +9,13 @@
 .booking-container > :first-child {
   grid-column: 1 / span 7;
 }
+
+@media (max-width: 900px){
+  .booking-container{
+    display: flex;
+    flex-direction: column;
+    .booking-form-container{
+      align-self: center;
+    }
+  }
+}
