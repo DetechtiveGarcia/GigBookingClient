@@ -68,17 +68,24 @@ export async function updateGigBooking(
     });
 
     if (!request.ok) {
-      const errorJson = await request.json().catch(() => null);
-      console.log(request.statusText);
-      console.error("Backend error details:", errorJson);
-      throw new Error(`Failed to update booking: ${request.status}`);
+      const errorData = await request.json().catch(() => null);
+      const errorMessage =
+        errorData?.message ||
+        (typeof errorData === "string" ? errorData : null) ||
+        `Kunde inte uppdatera bokningen (${request.status})`;
+
+      console.error("Backend error details:", errorData);
+      throw new Error(errorMessage);
     }
 
     const updatedBooking: GigBooking = await request.json();
     return updatedBooking;
   } catch (error) {
-    console.log("Error updating gig: " + error);
-    throw new Error("Error updating gig: " + error);
+    console.error("Error updating gig:", error);
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error("Ett oväntat fel uppstod vid uppdatering.");
   }
 }
 
@@ -89,13 +96,22 @@ export async function deleteGigBooking(id: string): Promise<boolean> {
     });
 
     if (!request.ok) {
-      console.log(request.statusText);
-      throw new Error(`Failed to delete booking: ${request.status}`);
+      const errorData = await request.json().catch(() => null);
+      const errorMessage =
+        errorData?.message ||
+        (typeof errorData === "string" ? errorData : null) ||
+        `Kunde inte radera bokningen (${request.status})`;
+
+      console.error("Backend error details:", errorData);
+      throw new Error(errorMessage);
     }
 
     return true;
   } catch (error) {
-    console.log("Error deleting gig: " + error);
-    throw new Error("Error deleting gig: " + error);
+    console.error("Error deleting gig:", error);
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error("Ett oväntat fel uppstod vid radering.");
   }
 }
