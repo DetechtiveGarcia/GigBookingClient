@@ -24,3 +24,25 @@
     font-size: var(--font-size-sm);
   }
 }
+
+/* booking-form.css */
+
+/* Ändrar font och utseende på själva dropdown-rutan */
+.booking-form-container select {
+  font-family: var(--font-inter); /* Eller det typsnitt du vill använda */
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+/* Ändrar font och färg på valen inuti listan när den öppnas */
+.booking-form-container select option {
+  font-family: var(--font-inter);
+  background-color: #000; /* Gör bakgrunden svart även när rutan är öppen */
+  color: #fff;
+  padding: 8px;
+}
+
+/* Gör just "Välj starttid"-rubriken lite mer dämpad om du vill */
+.booking-form-container select option[value=""] {
+  color: #888;
+}
