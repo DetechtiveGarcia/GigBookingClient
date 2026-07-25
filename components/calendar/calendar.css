@@ -254,3 +254,9 @@
 .fc-event-time, .fc-event-title{
   color: black;
 }
+
+.fc-day-mon, .fc-day-tue, .fc-day-wed, .fc-day-thu {
+  opacity: 0.35;
+  background-color: rgba(0, 0, 0, 0.2);
+  cursor: not-allowed !important;
+}
