@@ -21,7 +21,11 @@ import {
   FieldLabel,
   FieldError,
 } from "@/components/ui/field";
-import { extractTime, createISOString, getAvailableTimesForDate } from "@/lib/helpers";
+import {
+  extractTime,
+  createISOString,
+  getAvailableTimesForDate,
+} from "@/lib/helpers";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -150,229 +154,229 @@ export default function GigBookingModal({
           JSON.stringify([...savedGigBookings, booking]),
         );
 
+        toast.success("Bokning skapad!", {
+          description:
+            "Tack för din bokning! Bekräftelse med order nr. skickas till din e-post.",
+        });
+
         reset();
         setIsOpen(false);
         setBookingDone(!bookingDone);
         setBookedTime({ start: data.startTime, end: data.endTime });
       }
-    } catch (error) {
-      toast.error("Något gick fel vid sparandet.");
+    } catch (error: any) {
+      toast.error(
+        updateGigBooking.isUpdating
+          ? "Kunde inte uppdatera bokningen"
+          : "Kunde inte skapa bokningen",
+        {
+          description: error.message || "Något gick fel, försök igen senare.",
+        },
+      );
     }
   };
 
   return (
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogContent className="calendar-booking-modal sm:max-w-md">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <DialogHeader>
+            <DialogTitle>Boka {selectedDate}</DialogTitle>
+            <DialogDescription>
+              Fyll i dina uppgifter för att boka.
+            </DialogDescription>
+          </DialogHeader>
 
-      <Dialog open={isOpen} onOpenChange={setIsOpen} >
-        <DialogContent className="calendar-booking-modal sm:max-w-md">
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <DialogHeader>
-              <DialogTitle>Boka {selectedDate}</DialogTitle>
-              <DialogDescription>
-                Fyll i dina uppgifter för att boka.
-              </DialogDescription>
-            </DialogHeader>
-
-            <FieldGroup>
-              <div className="grid grid-cols-2 gap-4">
-                <Field>
-                  <FieldLabel>Starttid</FieldLabel>
-                  <Controller
-                    name="startTime"
-                    control={control}
-                    render={({ field }) => (
-                      <Select
-                        onValueChange={field.onChange}
-                        value={field.value}
-                      >
-                        <SelectTrigger className="w-full">
-                          <SelectValue placeholder="Välj tid" />
-                        </SelectTrigger>
-                        <SelectContent className="max-h-48 overflow-y-auto">
-                          <SelectGroup>
-                            {availableTimes.map((time) => (
-                              <SelectItem key={time} value={time}>
-                                {time}
-                              </SelectItem>
-                            ))}
-                          </SelectGroup>
-                        </SelectContent>
-                      </Select>
-                    )}
-                  />
-                  {errors.startTime && (
-                    <FieldError>{errors.startTime.message}</FieldError>
-                  )}
-                </Field>
-
-                <Field>
-                  <FieldLabel>Sluttid</FieldLabel>
-                  <Controller
-                    name="endTime"
-                    control={control}
-                    render={({ field }) => (
-                      <Select
-                        onValueChange={field.onChange}
-                        value={field.value}
-                      >
-                        <SelectTrigger className="w-full">
-                          <SelectValue placeholder="Välj tid" />
-                        </SelectTrigger>
-                        <SelectContent className="max-h-48 overflow-y-auto">
-                          <SelectGroup>
-                            {availableTimes.map((time) => (
-                              <SelectItem key={time} value={time}>
-                                {time}
-                              </SelectItem>
-                            ))}
-                          </SelectGroup>
-                        </SelectContent>
-                      </Select>
-                    )}
-                  />
-                  {errors.endTime && (
-                    <FieldError>{errors.endTime.message}</FieldError>
-                  )}
-                </Field>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <Field>
-                  <FieldLabel htmlFor="street">Gata</FieldLabel>
-                  <Input
-                    id="street"
-                    placeholder="Storgatan"
-                    {...register("street")}
-                  />
-                  {errors.street && (
-                    <FieldError>{errors.street.message}</FieldError>
-                  )}
-                </Field>
-
-                <Field>
-                  <FieldLabel htmlFor="streetNumber">Gatunummer</FieldLabel>
-                  <Input
-                    id="streetNumber"
-                    placeholder="14"
-                    {...register("streetNumber")}
-                  />
-                  {errors.streetNumber && (
-                    <FieldError>{errors.streetNumber.message}</FieldError>
-                  )}
-                </Field>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <Field>
-                  <FieldLabel htmlFor="zipCode">Postnummer</FieldLabel>
-                  <Input
-                    id="zipCode"
-                    placeholder="11122"
-                    {...register("zipCode")}
-                  />
-                  {errors.zipCode && (
-                    <FieldError>{errors.zipCode.message}</FieldError>
-                  )}
-                </Field>
-
-                <Field>
-                  <FieldLabel htmlFor="city">Stad</FieldLabel>
-                  <Input
-                    id="city"
-                    placeholder="Stockholm"
-                    {...register("city")}
-                  />
-                  {errors.city && (
-                    <FieldError>{errors.city.message}</FieldError>
-                  )}
-                </Field>
-              </div>
-
+          <FieldGroup>
+            <div className="grid grid-cols-2 gap-4">
               <Field>
-                <FieldLabel htmlFor="venue">Spelplats</FieldLabel>
-                <Input
-                  id="venue"
-                  placeholder="Berns Salonger"
-                  {...register("venue")}
+                <FieldLabel>Starttid</FieldLabel>
+                <Controller
+                  name="startTime"
+                  control={control}
+                  render={({ field }) => (
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Välj tid" />
+                      </SelectTrigger>
+                      <SelectContent className="max-h-48 overflow-y-auto">
+                        <SelectGroup>
+                          {availableTimes.map((time) => (
+                            <SelectItem key={time} value={time}>
+                              {time}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
                 />
-                {errors.venue && (
-                  <FieldError>{errors.venue.message}</FieldError>
+                {errors.startTime && (
+                  <FieldError>{errors.startTime.message}</FieldError>
                 )}
               </Field>
 
               <Field>
-                <FieldLabel htmlFor="clientName">Namn</FieldLabel>
-                <Input
-                  id="clientName"
-                  placeholder="Anna Lindgren"
-                  {...register("clientName")}
+                <FieldLabel>Sluttid</FieldLabel>
+                <Controller
+                  name="endTime"
+                  control={control}
+                  render={({ field }) => (
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Välj tid" />
+                      </SelectTrigger>
+                      <SelectContent className="max-h-48 overflow-y-auto">
+                        <SelectGroup>
+                          {availableTimes.map((time) => (
+                            <SelectItem key={time} value={time}>
+                              {time}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
                 />
-                {errors.clientName && (
-                  <FieldError>{errors.clientName.message}</FieldError>
+                {errors.endTime && (
+                  <FieldError>{errors.endTime.message}</FieldError>
+                )}
+              </Field>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <Field>
+                <FieldLabel htmlFor="street">Gata</FieldLabel>
+                <Input
+                  id="street"
+                  placeholder="Storgatan"
+                  {...register("street")}
+                />
+                {errors.street && (
+                  <FieldError>{errors.street.message}</FieldError>
                 )}
               </Field>
 
               <Field>
-                <FieldLabel htmlFor="clientEmail">Email</FieldLabel>
+                <FieldLabel htmlFor="streetNumber">Gatunummer</FieldLabel>
                 <Input
-                  id="clientEmail"
-                  type="email"
-                  placeholder="anna@email.com"
-                  {...register("clientEmail")}
+                  id="streetNumber"
+                  placeholder="14"
+                  {...register("streetNumber")}
                 />
-                {errors.clientEmail && (
-                  <FieldError>{errors.clientEmail.message}</FieldError>
+                {errors.streetNumber && (
+                  <FieldError>{errors.streetNumber.message}</FieldError>
+                )}
+              </Field>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <Field>
+                <FieldLabel htmlFor="zipCode">Postnummer</FieldLabel>
+                <Input
+                  id="zipCode"
+                  placeholder="11122"
+                  {...register("zipCode")}
+                />
+                {errors.zipCode && (
+                  <FieldError>{errors.zipCode.message}</FieldError>
                 )}
               </Field>
 
               <Field>
-                <FieldLabel htmlFor="clientPhone">Telefon</FieldLabel>
+                <FieldLabel htmlFor="city">Stad</FieldLabel>
                 <Input
-                  id="clientPhone"
-                  placeholder="0701234567"
-                  {...register("clientPhone")}
+                  id="city"
+                  placeholder="Stockholm"
+                  {...register("city")}
                 />
-                {errors.clientPhone && (
-                  <FieldError>{errors.clientPhone.message}</FieldError>
-                )}
+                {errors.city && <FieldError>{errors.city.message}</FieldError>}
               </Field>
-            </FieldGroup>
+            </div>
 
-            <DialogFooter className="mt-4 flex justify-between">
-              {isEditMode ? (
-                <>
-                  <Button
-                    type="button"
-                    variant="destructive"
-                    onClick={async () => {
-                      if (updateGigBooking.gigBooking) {
-                        try {
-                          await removeBooking(updateGigBooking.gigBooking.id);
-                          toast.success("Bokningen har avbokats");
-                          setIsOpen(false);
-                          setBookingDone(!bookingDone);
-                        } catch (error) {
-                          toast.error("Det gick inte att avboka. Försök igen.");
-                        }
-                      }
-                    }}
-                    className="mr-auto"
-                  >
-                    Avboka
-                  </Button>
-                  <Button type="submit">Spara ändringar</Button>
-                </>
-              ) : (
-                <>
-                  <DialogClose asChild>
-                    <Button variant="outline">Avbryt</Button>
-                  </DialogClose>
-                  <Button type="submit">Boka</Button>
-                </>
+            <Field>
+              <FieldLabel htmlFor="venue">Spelplats</FieldLabel>
+              <Input
+                id="venue"
+                placeholder="Berns Salonger"
+                {...register("venue")}
+              />
+              {errors.venue && <FieldError>{errors.venue.message}</FieldError>}
+            </Field>
+
+            <Field>
+              <FieldLabel htmlFor="clientName">Namn</FieldLabel>
+              <Input
+                id="clientName"
+                placeholder="Anna Lindgren"
+                {...register("clientName")}
+              />
+              {errors.clientName && (
+                <FieldError>{errors.clientName.message}</FieldError>
               )}
-            </DialogFooter>
-          </form>
-        </DialogContent>
-      </Dialog>
+            </Field>
 
+            <Field>
+              <FieldLabel htmlFor="clientEmail">Email</FieldLabel>
+              <Input
+                id="clientEmail"
+                type="email"
+                placeholder="anna@email.com"
+                {...register("clientEmail")}
+              />
+              {errors.clientEmail && (
+                <FieldError>{errors.clientEmail.message}</FieldError>
+              )}
+            </Field>
+
+            <Field>
+              <FieldLabel htmlFor="clientPhone">Telefon</FieldLabel>
+              <Input
+                id="clientPhone"
+                placeholder="0701234567"
+                {...register("clientPhone")}
+              />
+              {errors.clientPhone && (
+                <FieldError>{errors.clientPhone.message}</FieldError>
+              )}
+            </Field>
+          </FieldGroup>
+
+          <DialogFooter className="mt-4 flex justify-between">
+            {isEditMode ? (
+              <>
+                <Button
+                  type="button"
+                  variant="destructive"
+                  onClick={async () => {
+                    if (updateGigBooking.gigBooking) {
+                      try {
+                        await removeBooking(updateGigBooking.gigBooking.id);
+                        toast.success("Bokningen har avbokats");
+                        setIsOpen(false);
+                        setBookingDone(!bookingDone);
+                      } catch (error) {
+                        toast.error("Det gick inte att avboka. Försök igen.");
+                      }
+                    }
+                  }}
+                  className="mr-auto"
+                >
+                  Avboka
+                </Button>
+                <Button type="submit">Spara ändringar</Button>
+              </>
+            ) : (
+              <>
+                <DialogClose asChild>
+                  <Button variant="outline">Avbryt</Button>
+                </DialogClose>
+                <Button type="submit">Boka</Button>
+              </>
+            )}
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 }

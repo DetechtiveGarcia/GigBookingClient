@@ -1,5 +1,5 @@
 "use server";
-const apiUrl = process.env.NEXT_PUBLIC_API_URL
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 import { GigBookingRequest, GigBooking } from "@/types";
 export async function fetchAllGigBookings(): Promise<GigBooking[]> {
@@ -33,12 +33,21 @@ export async function createGigBooking(
     });
 
     if (!request.ok) {
-      console.log(request.statusText);
-      throw new Error(`${request.status}`);
-    }
+      // Försök läsa ut felmeddelandet som backenden skickade med
+      const errorData = await request.json().catch(() => null);
 
+      // Om backenden skickade { message: "..." } eller en ren textsträng
+      const errorMessage =
+        errorData?.message || errorData || "Det gick inte att skapa bokningen.";
+
+      throw new Error(
+        typeof errorMessage === "string"
+          ? errorMessage
+          : "Det gick inte att skapa bokningen.",
+      );
+    }
     const booking: GigBooking = await request.json();
-    return booking ;
+    return booking;
   } catch (error) {
     console.log("Error: " + error);
     throw new Error("Error: " + error);
@@ -51,7 +60,7 @@ export async function updateGigBooking(
 ): Promise<GigBooking> {
   try {
     const request = await fetch(`${apiUrl}/api/gigbooking/update/${id}`, {
-      method: "PUT", 
+      method: "PUT",
       body: JSON.stringify(gig),
       headers: {
         "Content-Type": "application/json",

@@ -42,40 +42,44 @@ export default function BookingForm() {
   const availableTimes = getAvailableTimesForDate(eventDate);
 
   const onSubmit = async (data: GigBookingFormValues) => {
-    if (!eventDate) {
-      toast.error("Vänligen välj ett eventdatum.");
-      return;
-    }
+  if (!eventDate) {
+    toast.error("Vänligen välj ett eventdatum.");
+    return;
+  }
 
-    try {
-      const requestPayload: GigBookingRequest = {
-        startDate: createISOString(eventDate, data.startTime),
-        endDate: createISOString(eventDate, data.endTime),
-        street: data.street,
-        streetNumber: data.streetNumber,
-        zipCode: data.zipCode,
-        city: data.city,
-        clientName: data.clientName,
-        clientEmail: data.clientEmail,
-        clientPhone: data.clientPhone,
-        venue: data.venue,
-      };
+  try {
+    const requestPayload: GigBookingRequest = {
+      startDate: createISOString(eventDate, data.startTime),
+      endDate: createISOString(eventDate, data.endTime),
+      street: data.street,
+      streetNumber: data.streetNumber,
+      zipCode: data.zipCode,
+      city: data.city,
+      clientName: data.clientName,
+      clientEmail: data.clientEmail,
+      clientPhone: data.clientPhone,
+      venue: data.venue,
+    };
 
-      const newBooking: GigBooking = await createGigBooking(requestPayload);
+    const newBooking: GigBooking = await createGigBooking(requestPayload);
 
-      const savedBookings = JSON.parse(localStorage.getItem("myBookings") ?? "[]");
-      localStorage.setItem("myBookings", JSON.stringify([...savedBookings, newBooking]));
+    // Spara i LocalStorage
+    const savedBookings = JSON.parse(localStorage.getItem("myBookings") ?? "[]");
+    localStorage.setItem("myBookings", JSON.stringify([...savedBookings, newBooking]));
 
-      toast.success("Tack för din förfrågan!", {
-        description: "Vi återkommer inom 48 timmar.",
-      });
+    toast.success("Tack för din förfrågan!", {
+      description: "Vi återkommer inom 48 timmar.",
+    });
 
-      reset();
-      setEventDate("");
-    } catch (error) {
-      toast.error("Något gick fel vid skapandet av förfrågan.");
-    }
-  };
+    reset();
+    setEventDate("");
+  } catch (error: any) {
+    // Här visas det exakta meddelandet från C# backenden i din toast!
+    toast.error("Kunde inte skicka bokningen", {
+      description: error.message || "Något gick fel, försök igen senare.",
+    });
+  }
+};
 
   return (
     <div className="booking-form-container">
