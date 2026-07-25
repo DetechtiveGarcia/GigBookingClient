@@ -21,7 +21,7 @@ import {
   FieldLabel,
   FieldError,
 } from "@/components/ui/field";
-import { extractTime, timeOptions, createISOString } from "@/lib/helpers";
+import { extractTime, createISOString, getAvailableTimesForDate } from "@/lib/helpers";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -59,7 +59,7 @@ export default function GigBookingModal({
   updateGigBooking,
 }: GigBookingModalProps) {
   const { modifyBooking, removeBooking } = useGigBookings();
-
+  const availableTimes = getAvailableTimesForDate(selectedDate);
   const {
     register,
     handleSubmit,
@@ -189,7 +189,7 @@ export default function GigBookingModal({
                         </SelectTrigger>
                         <SelectContent className="max-h-48 overflow-y-auto">
                           <SelectGroup>
-                            {timeOptions.map((time) => (
+                            {availableTimes.map((time) => (
                               <SelectItem key={time} value={time}>
                                 {time}
                               </SelectItem>
@@ -219,7 +219,7 @@ export default function GigBookingModal({
                         </SelectTrigger>
                         <SelectContent className="max-h-48 overflow-y-auto">
                           <SelectGroup>
-                            {timeOptions.map((time) => (
+                            {availableTimes.map((time) => (
                               <SelectItem key={time} value={time}>
                                 {time}
                               </SelectItem>

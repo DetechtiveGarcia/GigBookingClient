@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { useState, useEffect } from "react";
 import { useGigBookings } from "@/hooks/useGigBookings";
 import { GigBooking } from "@/types";
-import './calendar.css'
+import "./calendar.css";
 // import "@fullcalendar/common/main.css";
 // import "@fullcalendar/daygrid/main.css";
 export default function Calendar() {
@@ -107,6 +107,13 @@ export default function Calendar() {
           end: gb.endDate,
         }))}
         dateClick={(info) => {
+          const dayOfWeek = info.date.getDay();
+          if (dayOfWeek >= 1 && dayOfWeek <= 4) {
+            toast.error(
+              "Bokningar kan endast göras på fredagar, lördagar och söndagar.",
+            );
+            return;
+          }
           setSelectedDate(info.dateStr);
           setUpdateGigBooking({
             isUpdating: false,
@@ -114,13 +121,17 @@ export default function Calendar() {
           });
           setIsOpen(true);
         }}
+        selectAllow={(selectInfo) => {
+          const day = selectInfo.start.getDay();
+          return day === 0 || day === 5 || day === 6;
+        }}
         eventClick={(info) => {
           const currengigInLocalStorage = getBookingByIdLocalStorage(
             info.event.id,
           );
 
           if (!currengigInLocalStorage) {
-            setSelectedEventId(info.event.id); 
+            setSelectedEventId(info.event.id);
             setIsFindOpen(true);
             return;
           }
