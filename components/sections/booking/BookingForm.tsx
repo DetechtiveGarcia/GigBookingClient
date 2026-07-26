@@ -5,15 +5,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { toast } from "sonner";
 import { createGigBooking } from "@/lib/actions";
-import { 
-  GigBookingFormSchema, 
-  GigBookingFormValues, 
-  GigBookingRequest, 
-  GigBooking 
+import {
+  GigBookingFormSchema,
+  GigBookingFormValues,
+  GigBookingRequest,
+  GigBooking,
 } from "@/types/schemas";
 import { createISOString, getAvailableTimesForDate } from "@/lib/helpers";
 import FormGroup from "@/components/form/FormGroup";
 import "./booking-form.css";
+import FlexRow from "@/components/layout/flex/FlexRow";
 
 export default function BookingForm() {
   const [eventDate, setEventDate] = useState<string>("");
@@ -42,44 +43,49 @@ export default function BookingForm() {
   const availableTimes = getAvailableTimesForDate(eventDate);
 
   const onSubmit = async (data: GigBookingFormValues) => {
-  if (!eventDate) {
-    toast.error("Vänligen välj ett eventdatum.");
-    return;
-  }
+    if (!eventDate) {
+      toast.error("Vänligen välj ett eventdatum.");
+      return;
+    }
 
-  try {
-    const requestPayload: GigBookingRequest = {
-      startDate: createISOString(eventDate, data.startTime),
-      endDate: createISOString(eventDate, data.endTime),
-      street: data.street,
-      streetNumber: data.streetNumber,
-      zipCode: data.zipCode,
-      city: data.city,
-      clientName: data.clientName,
-      clientEmail: data.clientEmail,
-      clientPhone: data.clientPhone,
-      venue: data.venue,
-    };
+    try {
+      const requestPayload: GigBookingRequest = {
+        startDate: createISOString(eventDate, data.startTime),
+        endDate: createISOString(eventDate, data.endTime),
+        street: data.street,
+        streetNumber: data.streetNumber,
+        zipCode: data.zipCode,
+        city: data.city,
+        clientName: data.clientName,
+        clientEmail: data.clientEmail,
+        clientPhone: data.clientPhone,
+        venue: data.venue,
+      };
 
-    const newBooking: GigBooking = await createGigBooking(requestPayload);
+      const newBooking: GigBooking = await createGigBooking(requestPayload);
 
-    // Spara i LocalStorage
-    const savedBookings = JSON.parse(localStorage.getItem("myBookings") ?? "[]");
-    localStorage.setItem("myBookings", JSON.stringify([...savedBookings, newBooking]));
+      // Spara i LocalStorage
+      const savedBookings = JSON.parse(
+        localStorage.getItem("myBookings") ?? "[]",
+      );
+      localStorage.setItem(
+        "myBookings",
+        JSON.stringify([...savedBookings, newBooking]),
+      );
 
-    toast.success("Tack för din förfrågan!", {
-      description: "Vi återkommer inom 48 timmar.",
-    });
+      toast.success("Tack för din förfrågan!", {
+        description: "Vi återkommer inom 48 timmar.",
+      });
 
-    reset();
-    setEventDate("");
-  } catch (error: any) {
-    // Här visas det exakta meddelandet från C# backenden i din toast!
-    toast.error("Kunde inte skicka bokningen", {
-      description: error.message || "Något gick fel, försök igen senare.",
-    });
-  }
-};
+      reset();
+      setEventDate("");
+    } catch (error: any) {
+      // Här visas det exakta meddelandet från C# backenden i din toast!
+      toast.error("Kunde inte skicka bokningen", {
+        description: error.message || "Något gick fel, försök igen senare.",
+      });
+    }
+  };
 
   return (
     <div className="booking-form-container">
@@ -93,17 +99,56 @@ export default function BookingForm() {
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormGroup label="namn" {...register("clientName")} />
-        {errors.clientName && <p className="text-red-500 text-xs">{errors.clientName.message}</p>}
+        {errors.clientName && (
+          <p className="text-red-500 text-xs">{errors.clientName.message}</p>
+        )}
+        <br />
+        <FlexRow>
+          <FormGroup label="email" type="email" {...register("clientEmail")} />
+          {errors.clientEmail && (
+            <p className="text-red-500 text-xs">{errors.clientEmail.message}</p>
+          )}
+          <br />
+          <FormGroup label="telefon" {...register("clientPhone")} />
+          {errors.clientPhone && (
+            <p className="text-red-500 text-xs">{errors.clientPhone.message}</p>
+          )}
+          <br />
+        </FlexRow>
+        <FormGroup label="spelplats" {...register("venue")} />
+        {errors.venue && (
+          <p className="text-red-500 text-xs">{errors.venue.message}</p>
+        )}
         <br />
 
-        <FormGroup label="email" type="email" {...register("clientEmail")} />
-        {errors.clientEmail && <p className="text-red-500 text-xs">{errors.clientEmail.message}</p>}
-        <br />
+        <FlexRow>
+          <FormGroup label="gata" {...register("street")} />
+          {errors.street && (
+            <p className="text-red-500 text-xs">{errors.street.message}</p>
+          )}
+          <br />
 
-        <FormGroup label="telefon" {...register("clientPhone")} />
-        {errors.clientPhone && <p className="text-red-500 text-xs">{errors.clientPhone.message}</p>}
-        <br />
+          <FormGroup label="gatunummer" {...register("streetNumber")} />
+          {errors.streetNumber && (
+            <p className="text-red-500 text-xs">
+              {errors.streetNumber.message}
+            </p>
+          )}
+          <br />
+        </FlexRow>
+        <FlexRow>
+          <FormGroup label="postnummer" {...register("zipCode")} />
+          {errors.zipCode && (
+            <p className="text-red-500 text-xs">{errors.zipCode.message}</p>
+          )}
+          <br />
 
+          <FormGroup label="stad" {...register("city")} />
+          {errors.city && (
+            <p className="text-red-500 text-xs">{errors.city.message}</p>
+          )}
+          <br />
+        </FlexRow>
         {/* Datumväljare */}
         <div>
           <label className="text-dark uppercase letter-spacing block mb-1">
@@ -117,7 +162,6 @@ export default function BookingForm() {
           />
         </div>
         <br />
-
         {/* Starttid */}
         <div>
           <label className="text-dark uppercase letter-spacing block mb-1">
@@ -129,13 +173,16 @@ export default function BookingForm() {
           >
             <option value="">Välj starttid</option>
             {availableTimes.map((time) => (
-              <option key={time} value={time}>{time}</option>
+              <option key={time} value={time}>
+                {time}
+              </option>
             ))}
           </select>
-          {errors.startTime && <p className="text-red-500 text-xs">{errors.startTime.message}</p>}
+          {errors.startTime && (
+            <p className="text-red-500 text-xs">{errors.startTime.message}</p>
+          )}
         </div>
         <br />
-
         {/* Sluttid */}
         <div>
           <label className="text-dark uppercase letter-spacing block mb-1">
@@ -147,34 +194,21 @@ export default function BookingForm() {
           >
             <option value="">Välj sluttid</option>
             {availableTimes.map((time) => (
-              <option key={time} value={time}>{time}</option>
+              <option key={time} value={time}>
+                {time}
+              </option>
             ))}
           </select>
-          {errors.endTime && <p className="text-red-500 text-xs">{errors.endTime.message}</p>}
+          {errors.endTime && (
+            <p className="text-red-500 text-xs">{errors.endTime.message}</p>
+          )}
         </div>
         <br />
-
-        <FormGroup label="spelplats" {...register("venue")} />
-        {errors.venue && <p className="text-red-500 text-xs">{errors.venue.message}</p>}
-        <br />
-
-        <FormGroup label="stad" {...register("city")} />
-        {errors.city && <p className="text-red-500 text-xs">{errors.city.message}</p>}
-        <br />
-
-        <FormGroup label="gata" {...register("street")} />
-        {errors.street && <p className="text-red-500 text-xs">{errors.street.message}</p>}
-        <br />
-
-        <FormGroup label="gatunummer" {...register("streetNumber")} />
-        {errors.streetNumber && <p className="text-red-500 text-xs">{errors.streetNumber.message}</p>}
-        <br />
-
-        <FormGroup label="postnummer" {...register("zipCode")} />
-        {errors.zipCode && <p className="text-red-500 text-xs">{errors.zipCode.message}</p>}
-        <br />
-
-        <button type="submit" disabled={isSubmitting} className="letter-spacing">
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="letter-spacing"
+        >
           {isSubmitting ? "Skickar..." : "Skicka"}
         </button>
       </form>
