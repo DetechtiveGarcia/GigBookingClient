@@ -3,8 +3,10 @@ import BookingForm from "./BookingForm";
 import Calendar from "@/components/calendar/Calendar";
 import "./booking.css";
 import Gigs from "@/components/gigs/Gigs";
+import { useGigBookings } from "@/hooks/useGigBookings";
 
 export default function Booking() {
+  const { gigBookings, refresh } = useGigBookings();
   return (
     <section className="wrapper" id="booking">
       <div className="booking-container">
@@ -17,13 +19,11 @@ export default function Booking() {
               </>
             }
           />
-          <Gigs />
+          <Gigs gigBookings={gigBookings} />
         </div>
         <BookingForm />
-
-
       </div>
-       <Calendar />
+      <Calendar gigBookings={gigBookings} refresh={refresh} />
     </section>
   );
 }
