@@ -1,4 +1,5 @@
 "use client";
+
 import FindBookingModal from "../FindBookingModal";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -7,13 +8,15 @@ import svLocale from "@fullcalendar/core/locales/sv";
 import GigBookingModal from "../GigBookingModal";
 import { toast } from "sonner";
 import { useState, useEffect } from "react";
-import { useGigBookings } from "@/hooks/useGigBookings";
 import { GigBooking } from "@/types";
 import "./calendar.css";
-// import "@fullcalendar/common/main.css";
-// import "@fullcalendar/daygrid/main.css";
-export default function Calendar() {
-  const { gigBookings, refresh, getBookingByIdLocalStorage } = useGigBookings();
+
+type CalendarProps = {
+  gigBookings: GigBooking[];
+  refresh: () => Promise<void> | void;
+};
+
+export default function Calendar({ gigBookings, refresh }: CalendarProps) {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [bookedTime, setBookedTime] = useState<{
     start: string;
@@ -28,66 +31,35 @@ export default function Calendar() {
   const [isFindOpen, setIsFindOpen] = useState(false);
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
 
+  // Hjälpfunktion för local storage sökning direkt
+  const getBookingByIdLocalStorage = (id: string): GigBooking | undefined => {
+    const saved = JSON.parse(localStorage.getItem("myBookings") ?? "[]");
+    return saved.find((gb: GigBooking) => gb.id === id);
+  };
+
   const handleBookingFound = (booking: GigBooking) => {
-    // Sätt datumet så att modalens titel ("Boka YYYY-MM-DD") stämmer överens
     setSelectedDate(booking.startDate.split("T")[0]);
-
-    // Sätt edit-state med bokningen vi hittade via API-listan
     setUpdateGigBooking({ isUpdating: true, gigBooking: booking });
-
-    // Öppna den vanliga bokningsmodalen i edit-läge!
     setIsOpen(true);
   };
 
-  useEffect(() => {
-    console.log("bookingDone changed:", bookingDone);
-    if (!bookingDone) return;
+  
 
-    const formatted = bookedTime
-      ? new Date(`${selectedDate}T${bookedTime.start}`).toLocaleString(
-          "sv-SE",
-          {
-            dateStyle: "long",
-            timeStyle: "short",
-          },
-        )
-      : selectedDate;
-
-    toast.success("Tack för din bokning!", {
-      description: `${formatted} - ${bookedTime?.end}`,
-      position: "top-center",
-      style: {
-        background: "#0A0A0A",
-        color: "white",
-      },
-    });
-
-    //   toast.success("Bekrästelse skickas till 'balblab' med odernummer om du önskar ombokad eller avboka", {
-    //   description: `${formatted} - ${bookedTime?.end}`,
-    //   position: "top-center",
-    //   style: {
-    //   background: "#0A0A0A",
-    //   color: "white",
-    // }
-    // });
-
-    refresh();
-    setBookingDone(false);
-  }, [bookingDone]);
   return (
     <div className="calendar-container">
       <h2 className="text-white serif">Bokningskalender</h2>
+
       <GigBookingModal
-        {...{
-          isOpen,
-          setIsOpen,
-          selectedDate,
-          bookingDone,
-          setBookingDone,
-          setBookedTime,
-          updateGigBooking,
-        }}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        selectedDate={selectedDate}
+        bookingDone={bookingDone}
+        setBookingDone={setBookingDone}
+        setBookedTime={setBookedTime}
+        updateGigBooking={updateGigBooking}
+        refresh={refresh}
       />
+
       <FindBookingModal
         isOpen={isFindOpen}
         setIsOpen={setIsFindOpen}
@@ -95,6 +67,7 @@ export default function Calendar() {
         onBookingFound={handleBookingFound}
         clickedEventId={selectedEventId}
       />
+
       <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
