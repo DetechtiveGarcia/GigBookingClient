@@ -28,15 +28,17 @@ import {
 } from "@/lib/helpers";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { GigBookingRequest, GigBooking } from "@/types";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { GigBookingFormSchema, GigBookingFormValues } from "@/types/schemas";
-import { createGigBooking } from "@/lib/actions";
-import { useGigBookings } from "@/hooks/useGigBookings";
+import {
+  createGigBooking,
+  updateGigBooking as updateGigBookingAction,
+  deleteGigBooking,
+} from "@/lib/actions";
 
 type GigBookingModalProps = {
   isOpen: boolean;
@@ -51,6 +53,7 @@ type GigBookingModalProps = {
     isUpdating: boolean;
     gigBooking: GigBooking | null;
   };
+  refresh: () => Promise<void> | void;
 };
 
 export default function GigBookingModal({
@@ -61,8 +64,8 @@ export default function GigBookingModal({
   setBookingDone,
   setBookedTime,
   updateGigBooking,
+  refresh,
 }: GigBookingModalProps) {
-  const { modifyBooking, removeBooking } = useGigBookings();
   const availableTimes = getAvailableTimesForDate(selectedDate);
   const {
     register,
@@ -136,15 +139,24 @@ export default function GigBookingModal({
       };
 
       if (updateGigBooking.isUpdating && updateGigBooking.gigBooking) {
-        await modifyBooking(updateGigBooking.gigBooking.id, requestPayload);
+        // --- UPPDATERA BOKNING ---
+        const updatedBooking = await updateGigBookingAction(
+          updateGigBooking.gigBooking.id,
+          requestPayload,
+        );
 
+        const saved = JSON.parse(localStorage.getItem("myBookings") ?? "[]");
+        const updatedLocalStorage = saved.map((gb: GigBooking) =>
+          gb.id === updateGigBooking.gigBooking!.id ? updatedBooking : gb,
+        );
+        localStorage.setItem("myBookings", JSON.stringify(updatedLocalStorage));
+
+        // ENDAST EN TOAST FÖR UPPDATERING
         toast.success("Bokningen har uppdaterats!", {
-          description: "En ny bekräftelse har sparats.",
+          description: "Dina ändringar har sparats.",
         });
-        setIsOpen(false);
-        setBookingDone(!bookingDone);
-        setBookedTime({ start: data.startTime, end: data.endTime });
       } else {
+        // --- SKAPA NY BOKNING ---
         const booking: GigBooking = await createGigBooking(requestPayload);
         const savedGigBookings = JSON.parse(
           localStorage.getItem("myBookings") ?? "[]",
@@ -154,16 +166,20 @@ export default function GigBookingModal({
           JSON.stringify([...savedGigBookings, booking]),
         );
 
-        toast.success("Bokning skapad!", {
-          description:
-            "Tack för din bokning! Bekräftelse med order nr. skickas till din e-post.",
+        // ENDAST EN TOAST FÖR NY BOKNING
+        toast.success("Tack för din bokning!", {
+          description: `Bokad för ${selectedDate} (${data.startTime} - ${data.endTime}). Bekräftelse skickas till din e-post.`,
+          position: "top-center",
+          style: {
+            background: "#0A0A0A",
+            color: "white",
+          },
         });
-
-        reset();
-        setIsOpen(false);
-        setBookingDone(!bookingDone);
-        setBookedTime({ start: data.startTime, end: data.endTime });
       }
+
+      reset();
+      setIsOpen(false);
+      await refresh();
     } catch (error: any) {
       toast.error(
         updateGigBooking.isUpdating
@@ -351,10 +367,24 @@ export default function GigBookingModal({
                   onClick={async () => {
                     if (updateGigBooking.gigBooking) {
                       try {
-                        await removeBooking(updateGigBooking.gigBooking.id);
+                        await deleteGigBooking(updateGigBooking.gigBooking.id);
+
+                        const saved = JSON.parse(
+                          localStorage.getItem("myBookings") ?? "[]",
+                        );
+                        const updatedLocalStorage = saved.filter(
+                          (gb: GigBooking) =>
+                            gb.id !== updateGigBooking.gigBooking!.id,
+                        );
+                        localStorage.setItem(
+                          "myBookings",
+                          JSON.stringify(updatedLocalStorage),
+                        );
+
                         toast.success("Bokningen har avbokats");
                         setIsOpen(false);
                         setBookingDone(!bookingDone);
+                        await refresh();
                       } catch (error) {
                         toast.error("Det gick inte att avboka. Försök igen.");
                       }
