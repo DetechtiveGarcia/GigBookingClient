@@ -1,0 +1,46 @@
+.serviceCardsContainer {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  gap: 3vw;
+  margin-top: 3rem;
+}
+
+.buttonOrange,
+.buttonDark {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 1.5;
+  height: 2.5rem;
+  margin-top: 1rem;
+}
+
+.buttonOrange {
+  background: var(--color-orange);
+  transition: 0.5s;
+}
+
+.buttonDark {
+  border: 1px solid var(--color-orange);
+  background: var(--bg-color-dark);
+  color: var(--color-orange);
+  transition: 0.5s;
+}
+
+.buttonDark:hover {
+  background: var(--color-orange);
+  color: black;
+}
+
+.buttonOrange:hover {
+  color: var(--color-orange);
+  background: var(--color-white);
+}
+
+@media (max-width: 886px) {
+  .serviceCardsContainer {
+    grid-template-columns: auto;
+  }
+}
