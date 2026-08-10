@@ -3,6 +3,7 @@
 import Hero from "@/components/sections/hero/Hero";
 import Marquee from "@/components/marquee/Marquee";
 import Listen from "@/components/sections/listen/Listen";
+import Services from "@/components/sections/services/Services";
 import Discography from "@/components/sections/discography/Discography";
 import Artist from "@/components/sections/artist/Artist";
 import Booking from "@/components/sections/booking/Booking";
@@ -19,6 +20,7 @@ export default function Home() {
       <Marquee />
       <Listen/>
       <Discography/>
+      <Services/>
       <Artist/>
       <Booking/>
     </>
