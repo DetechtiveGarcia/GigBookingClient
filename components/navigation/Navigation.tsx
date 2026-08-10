@@ -12,6 +12,9 @@ export default function Navigation() {
           <AppLink toSectionId="discography" label="diskografi" linkStyle="app-link"/>
         </li>
         <li>
+          <AppLink toSectionId="services" label="tjänster" linkStyle="app-link"/>
+        </li>
+        <li>
           <AppLink toSectionId="about" label="om mig" linkStyle="app-link"/>
         </li>
       </ul>
