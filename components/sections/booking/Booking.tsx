@@ -2,7 +2,7 @@ import SectionHeader from "@/components/section-header/SectionHeader";
 import BookingForm from "./BookingForm";
 import Calendar from "@/components/calendar/Calendar";
 import "./booking.css";
-import Gigs from "@/components/gigs/Gigs";
+import GigList from "@/components/gigs/GigList";
 import { useGigBookings } from "@/hooks/useGigBookings";
 
 export default function Booking() {
@@ -19,9 +19,8 @@ export default function Booking() {
               </>
             }
           />
-          <Gigs gigBookings={gigBookings} />
+          <GigList gigBookings={gigBookings} />
         </div>
-        <BookingForm />
       </div>
       <Calendar gigBookings={gigBookings} refresh={refresh} />
     </section>
