@@ -20,8 +20,8 @@ export default function Home() {
       <Marquee />
       <Listen/>
       <Discography/>
-      <Services/>
       <Artist/>
+      <Services/>
       <Booking/>
     </>
   );
