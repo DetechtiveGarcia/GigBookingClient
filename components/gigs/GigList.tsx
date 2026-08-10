@@ -1,10 +1,10 @@
 "use client";
 
-import styles from "./gigs.module.css";
+import styles from "./gig-list.module.css";
 import Gig from "./gig/Gig";
 import { useGigBookings } from "@/hooks/useGigBookings"; // Justera sökvägen om det behövs
 import { GigBooking } from "@/types";
-type GigsProps = {
+type GigListProps = {
   gigBookings: GigBooking[];
 };
 
@@ -21,7 +21,7 @@ function formatDate(dateTimeStr: string) {
     .toUpperCase();
 }
 
-export default function Gigs({ gigBookings }: GigsProps) {
+export default function GigList({ gigBookings }: GigListProps) {
   if (!gigBookings || gigBookings.length <= 0) {
     return <p className="text-white text-center">Inga spelningar.</p>;
   }
