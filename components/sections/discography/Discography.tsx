@@ -42,7 +42,7 @@ export default function Discography() {
       <div className="discography-container">
         <div className="header-layout">
           <SectionHeader
-            sectionLabel="02 / Discography"
+            sectionLabel="02 / Diskografi"
             sectionHeading={
               <>
                 Ett decenium med {<span className="italic">sex strängar.</span>}
