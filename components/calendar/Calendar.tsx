@@ -48,7 +48,7 @@ export default function Calendar({ gigBookings, refresh }: CalendarProps) {
   return (
     <div className="calendar-container">
       <h2 className="text-white serif">Bokningskalender</h2>
-
+      <p className="text-dark">Välj ditt önskade datum nedan. <br/>Om du klickar på en dag öppnas bokningsformuläret.</p>
       <GigBookingModal
         isOpen={isOpen}
         setIsOpen={setIsOpen}
