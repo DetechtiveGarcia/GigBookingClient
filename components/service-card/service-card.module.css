@@ -1,0 +1,61 @@
+.serviceCard {
+  display: flex;
+  flex-direction: column;
+  max-width: 700px;
+  background: #140e0966;
+  border: 1px solid #160d07;
+  padding: 3rem;
+  min-height: 600px;
+  button {
+    margin-top: 1rem;
+  }
+  ul {
+    margin-top: auto;
+    li {
+      margin: 0.5rem 0;
+    }
+  }
+}
+
+.serviceCardHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #291f1899;
+}
+
+.title {
+  font-size: var(--font-size-3xl);
+}
+
+.price {
+  font-size: var(--font-size-3xl);
+  text-align: end;
+}
+
+.packageDetails {
+  font-size: var(--font-size-xxs);
+}
+
+.details {
+  white-space: pre-line;
+  font-size: var(--font-size-base);
+}
+
+.feature::before {
+  content: "";
+  display: inline-block;
+  height: 1px;
+  width: 15px;
+  margin-right: 8px;
+  vertical-align: middle;
+  background: var(--color-orange);
+}
+
+@media (max-width: 1024px) {
+  .serviceCard {
+    padding: 2.5rem;
+    max-width: 100%;
+  }
+}
