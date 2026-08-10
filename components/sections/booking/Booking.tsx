@@ -12,7 +12,7 @@ export default function Booking() {
       <div className="booking-container">
         <div>
           <SectionHeader
-            sectionLabel="04 / boka"
+            sectionLabel="05 / boka"
             sectionHeading={
               <>
                 Spelningar <span className="italic">2026</span>
