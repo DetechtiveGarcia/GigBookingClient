@@ -4,12 +4,11 @@ export default function Hero() {
   return (
     <section className="hero overlay sides-padding">
       <div className="wrapper">
-        <span className="text-orange letter-spacing">NY ALBUM UTE NU</span>
+        <span className="text-orange letter-spacing">3 ALBUM UTE NU</span>
         <LatestAlbum
-          titleWhite="Ember"
-          titleOrange="Kören"
-          description="Elva spår med långsamt spelad fingerplockad gitarr, inspelade under en
-          enda helg i ett ökenkapell utanför Marfa."
+          titleWhite="Temoll"
+          titleOrange="Dur"
+          description="Gitarr, rapp och sång från hemma studio"
         />
       </div>
     </section>

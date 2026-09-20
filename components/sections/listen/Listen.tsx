@@ -10,15 +10,19 @@ export default function Listen() {
             sectionLabel="01 / Nu spelas"
             sectionHeading={
               <>
-                Det nya <span className="italic">albumet</span> <br /> i sin
-                helhet.
+                {/* Det nya  */}
+                <span className="italic">Kärleks-album</span> 
+                {/* <br /> i sin */}
+                {/* helhet. */}
               </>
             }
           />
           <p className="text-dark">
-            Kärlek-album är Temolldurs tredje fullängdsverk — en meditation om
+            {/* Kärlek-album är Temolldurs tredje fullängdsverk — en meditation om
             värme, avstånd och resonansen i ett tomt rum. Tryck på play &#x25B6; och låt
-            det rinna.
+            det rinna. */}
+            Ett Album dedikerad med kärlek. <br/> Skriven och komponerad av Temolldur. <br/>Tryck på play &#x25B6; och låt
+            musiken flöda i öronen.
           </p>
         </div>
         <div className="listen-playlist-container">

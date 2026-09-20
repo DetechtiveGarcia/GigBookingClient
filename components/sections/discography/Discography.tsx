@@ -9,33 +9,33 @@ import AlbumItem from "./AlbumItem";
 export default function Discography() {
   const albumList = [
     {
-      title: "Ember Kören",
-      trackCountOfAlbum: 11,
+      title: "Rapalbum",
+      trackCountOfAlbum: 10,
       img: album1,
-      alt: "Bild på omslaget av albumet Ember Kören",
+      alt: "Bild på omslaget av albumet Rapalbum",
+      releaseDate: 2024,
+    },
+    {
+      title: "Årstidsvisor",
+      trackCountOfAlbum: 8,
+      img: album2, //samma bild som på rapalbum
+      alt: "Bild på omslaget av albumet Årstidsvisor",
+      releaseDate: 2025,
+    },
+    {
+      title: "Kärleks-album",
+      trackCountOfAlbum: 8,
+      img: album3,
+      alt: "Bild på omslaget av albumet Kärleks-album",
       releaseDate: 2026,
     },
-    {
-      title: "Låga Frekvenser",
-      trackCountOfAlbum: 9,
-      img: album2,
-      alt: "Bild på omslaget av albumet Låga frekvenser",
-      releaseDate: 2023,
-    },
-    {
-      title: "Mässing & Koppar",
-      trackCountOfAlbum: 5,
-      img: album3,
-      alt: "Bild på omslaget av albumet Mässing & Koppar",
-      releaseDate: 2021,
-    },
-    {
-      title: "Mjuka Ekon",
-      trackCountOfAlbum: 12,
-      img: album4,
-      alt: "Bild på omslaget av albumet Mjuka Ekon",
-      releaseDate: 2019,
-    },
+    // {
+    //   title: "Mjuka Ekon",
+    //   trackCountOfAlbum: 12,
+    //   img: album4,
+    //   alt: "Bild på omslaget av albumet Mjuka Ekon",
+    //   releaseDate: 2019,
+    // },
   ];
   return (
     <section className="wrapper" id="discography">
@@ -50,8 +50,7 @@ export default function Discography() {
             }
           />
           <p className="text-white text-dark">
-            Fyra skivor. Otaliga sena kvällar. Varje utgåva egenproducerad i
-            samarbete med en liten krets av betrodda musiker.
+            3 Album med egen-komponerade låtar med hjälp av loopstation, mick och gitarr.
           </p>
         </div>
         <div className="album-grid">

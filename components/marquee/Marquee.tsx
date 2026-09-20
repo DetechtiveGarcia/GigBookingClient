@@ -2,7 +2,7 @@ import MarqueeText from "./MarqueeText";
 import "./marquee.css";
 
 export default function Marquee() {
-  const textList = ["Ember Kören", "Ute nu", "Spotify"];
+  const textList = ["Temolldur", "Ute nu", "Spotify"];
 
   return (
     <section className="marquee-container">

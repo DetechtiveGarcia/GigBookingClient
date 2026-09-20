@@ -36,7 +36,7 @@ export default function Services() {
           price="5000kr"
           packageDetails="3 timmar live"
           details={
-            "Covers och egna låtar med massa gitarrsolon emellanåt — perfekt för barer, restauranger, privatfester, AW, festivaler och företagsevent.\n \nRepertoar med klassiker från Creedence Clearwater Revival, Elvis Presley, Ben E. King, Tommy Nilsson, Nanne Grönvall, Patrik Isaksson, Red Hot Chili Peppers m.fl. Blandat med egna låtar för en mer personlig och unik upplevelse."
+            "Covers och egna låtar med massa gitarrsolon emellanåt — perfekt för barer, restauranger, privatfester, AW, festivaler och företagsevent.\n \nRepertoar med klassiker från Creedence Clearwater Revival, Elvis Presley, Ben E. King, Tommy Nilsson, Nanne Grönvall, Ed Sheeran, Patrik Isaksson, Red Hot Chili Peppers m.fl. Blandat med egna låtar för en mer personlig och unik upplevelse."
           }
           features={[
             "Professionellt ljud & bra energi",

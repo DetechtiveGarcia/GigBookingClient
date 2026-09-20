@@ -31,26 +31,26 @@ export default function Artist() {
             sectionLabel="03 / Om mig"
             sectionHeading={
               <>
-                <span className="italic">Artisten.</span>
+                <span className="italic">Temolldur</span>
               </>
             }
           />
         </div>
         <div className="artist-description">
           <p className="italic text-white serif text-center">
-            "Jag vill att varje ton ska låta som om den kunde ha varit den sista."
+            "Jag vill komponera det ingen har gjort förut."
           </p>
           <p className="text-dark">
-            Temolldur är gitarrist och kompositör baserad mellan himmel och jord. Med inspiration från amerikanska primitiv-, postrock- och ambient- traditioner balanserar hans spel precision med tålamod - byggt på varma rörförstärkare, dammiga pedaler och en hollow-body från 1962 som har följt honom från hans första spelningar på barer till världens tystaste konserthus.
+            Med Ackord och melodier som har ett unikt sound i massa olika tonarter med solon till.
           </p>
             <br />
-          <p className="text-dark">Sedan 2019 har han släppt fyra album, turnerat över tre kontinenter och samarbetat med artister som Petter, Svenska Björnstammen och <span className="italic">fcking</span> Snoop Dogg.</p>
+          <p className="text-dark">Med hjälp av loopstation får jag ett <span className="italic">unikt</span> en-mans band sound som jag kan framföra live med över 50 egna låtar och covers.</p>
           <hr />
-          <div className="metrics-container">
+          {/* <div className="metrics-container">
             <ul className="metrics-list">
                 {metricList.map((m, i) => <li key={i}><MetricCard value={m.value} label={m.label}/></li>)}
             </ul>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
