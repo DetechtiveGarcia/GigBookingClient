@@ -1,7 +1,7 @@
-import album1 from "@/public/album-1.jpg";
-import album2 from "@/public/album-2.jpg";
-import album3 from "@/public/album-3.jpg";
-import album4 from "@/public/album-4.jpg";
+import album1 from "@/public/7a7117ea-ae42-467f-b47e-dc0c75c8ae72.jpeg";
+import album2 from "@/public/årstidsvisor.jpg";
+import album3 from "@/public/kärleks-album.jpg";
+// import album4 from "@/public/album-4.jpg";
 import SectionHeader from "@/components/section-header/SectionHeader";
 import "./discography.css";
 import AlbumItem from "./AlbumItem";
