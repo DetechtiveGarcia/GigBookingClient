@@ -21,7 +21,6 @@
     vertical-align: middle;
     background: var(--color-orange);
   }
-
 }
 
 @media (min-width: 1200px) {
@@ -33,5 +32,10 @@
 @media (max-width: 1200px){
   .hero{
     padding: 0;
+  }
+}
+@media (max-width: 400px) {
+  .hero {
+    background-position: center 20%;
   }
 }
