@@ -1,26 +1,42 @@
-.discography-container{
-    .header-layout{
+.discography-container {
+    .header-layout {
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
-        p{
+
+        p {
             font-size: var(--font-size-sm);
             max-width: 325px;
         }
     }
 }
 
-.album-list{
+.album-list {
     display: flex;
     justify-content: space-between;
     gap: 10px;
     margin: 1rem 0;
 }
 
-@media (max-width: 1200px){
-    .album-list{
+@media (max-width: 1200px) {
+    .album-list {
         flex-wrap: wrap;
         justify-content: center;
         gap: 30px;
+    }
+
+}
+
+@media (max-width: 500px) {
+    .header-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+        align-items: center;
+
+        & > p {
+            align-self: center;
+        }
     }
 }
