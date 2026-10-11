@@ -1,4 +1,5 @@
 import SectionHeader from "../../section-header/SectionHeader";
+import SpofityAlbum from "@/components/spotify-album/SpotifyAlbum";
 import "./listen.css";
 
 export default function Listen() {
@@ -25,20 +26,11 @@ export default function Listen() {
             musiken flöda i öronen.
           </p>
         </div>
-        <div className="listen-playlist-container">
-          <div className="listen-playlist">
-            <iframe
-              data-testid="embed-iframe"
-              style={{ borderRadius: "12px" }}
-              src="https://open.spotify.com/embed/album/7JTZc7mSQGxw1Iqabx6XQE?utm_source=generator&theme=0&si=1cac31dd345a49ca"
-              width="100%"
-              height="500"
-              frameBorder="0"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy"
-            ></iframe>
-          </div>
-        </div>
+        <SpofityAlbum src="https://open.spotify.com/embed/album/7JTZc7mSQGxw1Iqabx6XQE?utm_source=generator&theme=0&si=1cac31dd345a49ca"/>
+        <SpofityAlbum src="https://open.spotify.com/embed/album/2SYVB4EaOl78LmtM53jkwR?utm_source=generator&si=e008d5caa9024e58" style={{ height: "80" }} />
+        <SpofityAlbum src="https://open.spotify.com/embed/album/4BJqNwJUGwQxw5jX7sVDjS?utm_source=generator&si=91610d17dcce4077" />
+        <SpofityAlbum src="https://open.spotify.com/embed/album/5izgtCbM4yX45hoJmFmDq3?utm_source=generator&si=8ae9339492d94223" />
+              
       </div>
     </section>
   );
